@@ -17,8 +17,16 @@ depends_on = None
 
 
 def upgrade():
-    pass
+    op.create_table(
+        'parts',
+        sa.Column('ProductNum', sa.Integer, primary_key=True, autoincrement=False),
+        sa.Column('Manufacture', sa.String(255), sa.ForeignKey('manufacturer.Manufacture'), nullable=False),
+        sa.Column('ProductName', sa.String(100), nullable=False),
+        sa.Column('PurchasePrise', sa.String(45), nullable=False),
+        sa.Column('SellPrice', sa.String(45), nullable=False),
+        sa.Column('PartDescription', sa.String(1000))
+    )
 
 
 def downgrade():
-    pass
+    op.drop_table('parts')
