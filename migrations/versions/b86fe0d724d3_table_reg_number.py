@@ -26,4 +26,4 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table('reg_number')
+        op.drop_table('reg_number')
