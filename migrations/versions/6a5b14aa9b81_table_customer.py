@@ -17,8 +17,12 @@ depends_on = None
 
 
 def upgrade():
-    pass
+    op.create_table(
+        'customer',
+        sa.Column('CustomerID', sa.Integer, primary_key=True, autoincrement=True, nullable=False),
+        sa.Column('CustomerName', sa.String(255), nullable=False),
+    )
 
 
 def downgrade():
-    pass
+    op.drop_table('customer')
