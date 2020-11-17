@@ -14,15 +14,5 @@ class Part(Base):
     PartDescription = sa.Column(sa.String(1000))
     Maker = relationship("Manufacturer", back_populates="Parts")
 
-
     def __repr__(self):
         return f'{self.ProductNum}, {self.Manufacture}, {self.ProductName}, {self.PurchasePrice}, {self.SellPrice}, {self.PartDescription}, {self.Maker}'
-
-
-
-def main():
-    pass
-
-
-if __name__ == "__main__":
-    main()
