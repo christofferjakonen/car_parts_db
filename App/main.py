@@ -1,6 +1,6 @@
-from db import Base, engine, session
-from models.manufacture import Manufacture
-from models.part import Part
+from Date.db import Base, engine, session
+from Data.models.manufacture import Manufacture
+from Data.models.part import Part
 
 
 def main():
