@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 
 class Warehouse(Base):
-    __tablename__ = 'warehouse'
+    __tablename__ = 'warehouses'
 
     ProductNum = sa.Column(sa.Integer, sa.ForeignKey('parts.ProductNum'))
     Aisle = sa.Column(sa.String(45), primary_key=True, nullable=False)
@@ -15,7 +15,7 @@ class Warehouse(Base):
     AutoBuyAmount = sa.Column(sa.Integer)
     ExpectedDeliveryDate = sa.Column(sa.DATE)
 
-    FkProductNum = relationship('Part', back_populates="FkWarehouse")
+    Warehouse_Part = relationship('Part', back_populates="Part_Warehouse")
 
     def __repr__(self):
         return f"{self.ProductNum}, {self.Aisle}, {self.Bay}, {self.Shelf}, {self.AmountInStock}, {self.MinAmount}, {self.AutoBuyAmount}, {self.ExpectedDeliveryDate}"

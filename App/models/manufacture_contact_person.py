@@ -11,7 +11,7 @@ class ManufactureContactPerson(Base):
     PhoneNumber = sa.Column(sa.String(50), primary_key=True, nullable=False),
     Email = sa.Column(sa.String(255), nullable=False)
 
-    FkManufacture = relationship('Manufacture', back_populates="FkContactPerson")
+    ManufactureContactPerson_Manufacture = relationship('Manufacture', back_populates="Manufacture_ManufactureContactPerson")
 
     def __repr__(self):
         return f"{self.Manufacture}, {self.FullName}, {self.PhoneNumber}, {self.Email}"

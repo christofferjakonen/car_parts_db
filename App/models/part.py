@@ -13,8 +13,11 @@ class Part(Base):
     SellPrice = sa.Column(sa.String(45), nullable=False)
     PartDescription = sa.Column(sa.String(1000))
 
-    Maker = relationship("Manufacturer", back_populates="SparePart")
-    FkWarehouse = relationship('Warehouse', back_populates="FkProductNum")
+    Part_Manufacture = relationship("Manufacture", back_populates="Manufacture_Part")
+    Part_Warehouse = relationship('Warehouse', back_populates="Warehouse_Part")
+    Part_CarHasPart = relationship('CarHasPart', back_populates="CarHasPart_Part")
+    Part_SupplierHasPart = relationship('SupplierHasPart', back_populates="SupplierHasPart_Part")
+
 
     def __repr__(self):
         return f'{self.ProductNum}, {self.Manufacture}, {self.ProductName}, {self.PurchasePrice}, {self.SellPrice}, {self.PartDescription}, {self.Maker}'
