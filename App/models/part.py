@@ -1,8 +1,3 @@
-from db import Base
-import sqlalchemy as sa
-from sqlalchemy.orm import relationship
-
-
 class Part(Base):
     __tablename__ = 'parts'
 
