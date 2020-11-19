@@ -23,7 +23,7 @@ def upgrade():
         sa.Column('Model', sa.String(45), nullable=False),
         sa.Column('Brand', sa.String(45), nullable=False),
         sa.Column('Color', sa.String(45), nullable=False),
-        sa.Column('Model', sa.String(45), nullable=False)
+        sa.Column('ModelYear', sa.String(45))
     )
 
 
