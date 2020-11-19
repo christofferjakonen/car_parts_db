@@ -1,6 +1,18 @@
-def main():
-    pass
+class Part(Base):
+    __tablename__ = 'parts'
+
+    ProductNum = sa.Column(sa.Integer, primary_key=True, autoincrement=False)
+    Manufacture = sa.Column(sa.String(255), sa.ForeignKey('manufacturer.Manufacture'), nullable=False)
+    ProductName = sa.Column(sa.String(100), nullable=False)
+    PurchasePrice = sa.Column(sa.String(45), nullable=False)
+    SellPrice = sa.Column(sa.String(45), nullable=False)
+    PartDescription = sa.Column(sa.String(1000))
+
+    Part_Manufacture = relationship("Manufacture", back_populates="Manufacture_Part")
+    Part_Warehouse = relationship('Warehouse', back_populates="Warehouse_Part")
+    Part_CarHasPart = relationship('CarHasPart', back_populates="CarHasPart_Part")
+    Part_SupplierHasPart = relationship('SupplierHasPart', back_populates="SupplierHasPart_Part")
 
 
-if __name__ == "__main__":
-    main()
+    def __repr__(self):
+        return f'{self.ProductNum}, {self.Manufacture}, {self.ProductName}, {self.PurchasePrice}, {self.SellPrice}, {self.PartDescription}, {self.Maker}'

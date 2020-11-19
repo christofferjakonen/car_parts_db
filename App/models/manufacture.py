@@ -8,7 +8,10 @@ class Manufacture(Base):
     ZipCode = sa.Column(sa.Integer, nullable=False)
     StreetAddress = sa.Column(sa.String(255), nullable=False)
     PhoneNumber = sa.Column(sa.String(45), nullable=False)
-    SparePart = relationship("Parts", back_populates="Manufacturer")
+
+    Manufacture_Parts = relationship("Part", back_populates="Part_Manufacture")
+    Manufacture_ManufactureContactPerson = relationship("ManufactureContactPerson", back_populates="ManufactureContactPerson_Manufacture")
+    Manufacture_SupplierHasManufacture = relationship("SupplierHasManufacture", back_populates="SupplierHasManufacture_Manufacture")
 
     def __repr__(self):
         return f'{self.Manufacture}, {self.Country}, {self.State}, {self.City}, {self.ZipCode}, {self.StreetAddress}, {self.PhoneNumber}, {self.SparePart}'
