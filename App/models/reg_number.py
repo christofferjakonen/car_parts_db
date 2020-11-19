@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 
 class RegNumber(Base):
-    __tablename__ = 'reg_number'
+    __tablename__ = 'reg_numbers'
 
     CustomerID = sa.Column(sa.Integer, sa.ForeignKey('customer.CustomerID'), nullable=False),
     RegNumber = sa.Column(sa.String(45), nullable=False, primary_key=True),
