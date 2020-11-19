@@ -11,8 +11,8 @@ class Car(Base):
     Brand = sa.Column(sa.String(45), nullable=False),
     Color = sa.Column(sa.String(45), nullable=False),
     ModelYear = sa.Column(sa.String(45))
-    RegNumCar = relationship("Reg_number", back_populates="ReNuCaID")
-    FkCarID = relationship("Car_has_parts", back_populates="RegNumCarID")
+    Car_RegNumber = relationship("RegNumber", back_populates="RegNumber_Car")
+    Car_CarHasParts = relationship("CarHasParts", back_populates="Car_CarHasParts")
 
     def __repr__(self):
         return f'{self.CarID}, {self.Model}, {self.Brand}, {self.Color}, {self.ModelYear}'

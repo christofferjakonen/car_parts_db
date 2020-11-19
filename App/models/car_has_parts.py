@@ -9,8 +9,8 @@ class CarHasParts(Base):
     CarID = sa.Column(sa.Integer, sa.ForeignKey('customer.CustomerID'), primary_key=True, nullable=False),
     PartsProductNum = sa.Column(sa.Integer, sa.ForeignKey('parts.ProductNum'), nullable=False, primary_key=True)
     FkCarID = relationship("Car", back_populates="CarID")
-    PartProdNum = relationship("Part", back_populates="PartProductNum")
-    RegNumCarID = relationship("Car", back_populates="FkCarID")
+    CarHasParts_Part = relationship("Part", back_populates="Part_CarHasParts")
+    CarHasParts_Car = relationship("Car", back_populates="Car_CarHasParts")
 
 
     def __repr__(self):

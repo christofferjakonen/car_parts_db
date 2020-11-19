@@ -9,8 +9,8 @@ class RegNumber(Base):
     CustomerID = sa.Column(sa.Integer, sa.ForeignKey('customer.CustomerID'), nullable=False),
     RegNumber = sa.Column(sa.String(45), nullable=False, primary_key=True),
     CarID = sa.Column(sa.Integer, sa.ForeignKey('car.CarID'), nullable=False)
-    FkCarCust = relationship("Customer", back_populates="FkCarCustomer")
-    ReNuCaID = relationship("Car", back_populates="RegNumCar")
+    RegNumber_Customer = relationship("Customer", back_populates="Customer_RegNumber")
+    RegNumber_Car = relationship("Car", back_populates="Car_RegNumber")
 
     def __repr__(self):
         return f'{self.CustomerID}, {self.RegNumber}, {self.CarID}'
