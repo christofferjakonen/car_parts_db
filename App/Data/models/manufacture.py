@@ -1,3 +1,8 @@
+from Data.db import Base
+import sqlalchemy as sa
+from sqlalchemy.orm import relationship
+
+
 class Manufacture(Base):
     __tablename__ = 'manufacturers'
 

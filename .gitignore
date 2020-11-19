@@ -1,5 +1,5 @@
 .idea/
-App/db/db_settings/__init__.py
+App/Data/db/db_settings/__init__.py
 venv/
 docker-compose.yml
 alembic.ini
