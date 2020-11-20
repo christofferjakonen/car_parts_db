@@ -14,7 +14,7 @@ class Manufacture(Base):
     StreetAddress = sa.Column(sa.String(255), nullable=False)
     PhoneNumber = sa.Column(sa.String(45), nullable=False)
 
-    Manufacture_Parts = relationship("Part", back_populates="Part_Manufacture")
+    Manufacture_Part = relationship("Part", back_populates="Part_Manufacture")
     Manufacture_ManufactureContactPerson = relationship("ManufactureContactPerson", back_populates="ManufactureContactPerson_Manufacture")
     Manufacture_SupplierHasManufacture = relationship("SupplierHasManufacture", back_populates="SupplierHasManufacture_Manufacture")
 
