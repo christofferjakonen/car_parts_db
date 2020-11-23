@@ -18,7 +18,7 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'car',
+        'cars',
         sa.Column('CarID', sa.Integer, primary_key=True, autoincrement=True, nullable=False),
         sa.Column('Model', sa.String(45), nullable=False),
         sa.Column('Brand', sa.String(45), nullable=False),
@@ -28,4 +28,4 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table('car')
+    op.drop_table('cars')

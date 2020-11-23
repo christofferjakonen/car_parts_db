@@ -19,7 +19,7 @@ depends_on = None
 def upgrade():
     op.create_table(
         'supplier_has_parts',
-        sa.Column('Supplier', sa.String(255), sa.ForeignKey('supplier.SupplierName'), primary_key=True, nullable=False),
+        sa.Column('Supplier', sa.String(255), sa.ForeignKey('suppliers.SupplierName'), primary_key=True, nullable=False),
         sa.Column('ProductNumPart', sa.INTEGER, sa.ForeignKey('parts.ProductNum'), primary_key=True, nullable=False)
     )
 

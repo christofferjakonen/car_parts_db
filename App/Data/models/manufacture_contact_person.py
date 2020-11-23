@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 
 class ManufactureContactPerson(Base):
-    __tablename__ = 'manufacture_contact_person'
+    __tablename__ = 'manufacture_contact_persons'
 
     Manufacture = sa.Column(sa.String(255), sa.ForeignKey('manufacturers.Manufacture'), nullable=False)
     FullName = sa.Column(sa.String(255), nullable=False)

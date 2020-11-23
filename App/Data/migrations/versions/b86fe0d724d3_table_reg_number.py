@@ -18,12 +18,12 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'reg_number',
-        sa.Column('CustomerID', sa.Integer, sa.ForeignKey('customer.CustomerID'), nullable=False),
+        'reg_numbers',
+        sa.Column('CustomerID', sa.Integer, sa.ForeignKey('customers.CustomerID'), nullable=False),
         sa.Column('RegNumber', sa.String(45), nullable=False, primary_key=True),
-        sa.Column('CarID', sa.Integer, sa.ForeignKey('car.CarID'), nullable=False)
+        sa.Column('CarID', sa.Integer, sa.ForeignKey('cars.CarID'), nullable=False)
     )
 
 
 def downgrade():
-        op.drop_table('reg_number')
+        op.drop_table('reg_numbers')

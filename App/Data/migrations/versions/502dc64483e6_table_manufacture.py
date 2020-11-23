@@ -18,7 +18,7 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'manufacturer',
+        'manufacturers',
         sa.Column('Manufacture', sa.String(255), primary_key=True),
         sa.Column('Country', sa.String(100), nullable=False),
         sa.Column('State', sa.String(255)),
@@ -30,4 +30,4 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table('manufacturer')
+    op.drop_table('manufacturers')
