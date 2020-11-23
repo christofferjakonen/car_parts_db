@@ -1,11 +1,12 @@
-from Controllers.parts_controller import get_all_parts
+from Controllers.parts_controller import get_all_parts, get_part_by_id
 
 def parts_menu():
     while True:
         print("Parts Menu")
         print("=========")
         print("1. Show All Parts")
-        print("2. Exit")
+        print("2. Show part by id")
+        print("3. Exit")
 
         selection = input("> ")
         if selection == "1":
@@ -16,4 +17,7 @@ def parts_menu():
             print("=========\n")
 
         if selection == "2":
+            print(get_part_by_id(input("> ")))
+
+        if selection == "3":
             break

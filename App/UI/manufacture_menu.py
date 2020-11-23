@@ -1,6 +1,6 @@
 from Controllers.manufacture_controller import get_all_manufacturers
 
-def parts_menu():
+def manufacture_menu():
     while True:
         print("Parts Menu")
         print("=========")

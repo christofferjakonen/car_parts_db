@@ -13,13 +13,16 @@ from Data.models.supplier_has_manufacture import SupplierHasManufacture
 from Data.models.supplier_has_parts import SupplierHasPart
 from Data.models.warehouse import Warehouse
 
+
 def get_all_parts():
     return session.query(Part).all()
 
-"""
-def get_customer_by_id(id):
-    return session.query(Customer).filter(Customer.customerNumber == id).first()
 
+def get_part_by_id(id):
+    return session.query(Part).filter(Part.ProductNum == id).first()
+
+
+"""
 
 def get_customer_by_name(pattern):
     # Post.query.filter(Post.tags.like(search)).all()
