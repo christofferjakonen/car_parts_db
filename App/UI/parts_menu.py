@@ -6,7 +6,8 @@ def parts_menu():
         print("=========")
         print("1. Show All Parts")
         print("2. Show part by id")
-        print("3. Exit")
+        print("3. Edit part by id")
+        print("4. Exit")
 
         selection = input("> ")
         if selection == "1":
@@ -17,7 +18,9 @@ def parts_menu():
             print("=========\n")
 
         if selection == "2":
+            print("\n=========")
             print(get_part_by_id(input("> ")))
+            print("=========\n")
 
         if selection == "3":
             break

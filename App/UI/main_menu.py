@@ -14,7 +14,7 @@ def main_menu():
         if selection == "1":
             parts_menu()
 
-        if selection == "3":
+        if selection == "2":
             manufacture_menu()
 
         if selection == "3":

@@ -2,15 +2,15 @@ from Controllers.manufacture_controller import get_all_manufacturers
 
 def manufacture_menu():
     while True:
-        print("Parts Menu")
+        print("Manufacturers Menu")
         print("=========")
-        print("1. Show All Parts")
+        print("1. Show All Manufacturers")
 
         selection = input("> ")
         if selection == "1":
-            parts = get_all_manufacturers()
-            for part in parts:
-                print(part)
+            manufacturers = get_all_manufacturers()
+            for manufacturer in manufacturers:
+                print(manufacturer)
 
         else:
             break

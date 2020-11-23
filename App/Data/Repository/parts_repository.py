@@ -15,11 +15,11 @@ from Data.models.warehouse import Warehouse
 
 
 def get_all_parts():
-    return session.query(Part).all()
+    return session.query(Part).order_by(Part.ProductNum).all()
 
 
-def get_part_by_id(id):
-    return session.query(Part).filter(Part.ProductNum == id).first()
+def get_part_by_id(inputID):
+    return session.query(Part).filter(Part.ProductNum == inputID).first()
 
 
 """
