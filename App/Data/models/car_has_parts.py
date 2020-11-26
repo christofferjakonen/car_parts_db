@@ -3,10 +3,10 @@ import sqlalchemy as sa
 from sqlalchemy.orm import relationship
 
 
-class CarHasPart(Base):
+class CarHasPart(Base):car_has_parts
     __tablename__ = 'car_has_parts'
 
-    CarID = sa.Column(sa.Integer, sa.ForeignKey('cars.CarID'), primary_key=True, nullable=False)
+    CarID = sa.Column(sa.Integer, sa.ForeignKey('cars.CarID', onupdate="CASCADE", ondelete="CASCADE"), primary_key=True, nullable=False)
     PartsProductNum = sa.Column(sa.Integer, sa.ForeignKey('parts.ProductNum'), nullable=False, primary_key=True)
     CarHasPart_Part = relationship("Part", back_populates="Part_CarHasPart")
     CarHasPart_Car = relationship("Car", back_populates="Car_CarHasPart")
