@@ -8,7 +8,6 @@ class CarHasPart(Base):
 
     CarID = sa.Column(sa.Integer, sa.ForeignKey('cars.CarID'), primary_key=True, nullable=False)
     PartsProductNum = sa.Column(sa.Integer, sa.ForeignKey('parts.ProductNum'), nullable=False, primary_key=True)
-    FkCarID = relationship("Car", back_populates="CarID")
     CarHasPart_Part = relationship("Part", back_populates="Part_CarHasPart")
     CarHasPart_Car = relationship("Car", back_populates="Car_CarHasPart")
 

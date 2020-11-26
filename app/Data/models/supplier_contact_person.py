@@ -4,9 +4,9 @@ from sqlalchemy.orm import relationship
 
 
 class SupplierContactPerson(Base):
-    __tablename__ = 'supplier_contact_people'
+    __tablename__ = 'supplier_contact_persons'
 
-    Supplier = sa.Column(sa.String(255), sa.ForeignKey('suppliers.SupplierName'), nullable=False)
+    Supplier = sa.Column(sa.String(255), sa.ForeignKey('suppliers.SupplierName', onupdate="CASCADE", ondelete="CASCADE"), nullable=False)
     FullName = sa.Column(sa.String(255), nullable=False)
     PhoneNumber = sa.Column(sa.String(50), primary_key=True, nullable=False)
     Email = sa.Column(sa.String(255), nullable=False)

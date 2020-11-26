@@ -7,7 +7,7 @@ class SupplierAddress(Base):
     __tablename__ = 'supplier_addresses'
 
     SupplierAddressID = sa.Column(sa.INTEGER, primary_key=True, nullable=False, autoincrement=True)
-    Supplier = sa.Column(sa.String(255), sa.ForeignKey('suppliers.SupplierName'), nullable=False)
+    Supplier = sa.Column(sa.String(255), sa.ForeignKey('suppliers.SupplierName', onupdate="CASCADE", ondelete="CASCADE"), nullable=False)
     Country = sa.Column(sa.String(255), nullable=False)
     State = sa.Column(sa.String(255))
     City = sa.Column(sa.String(255), nullable=False)
