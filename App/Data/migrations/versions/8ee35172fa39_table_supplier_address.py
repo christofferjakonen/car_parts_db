@@ -18,9 +18,9 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'supplier_address',
+        'supplier_addresses',
         sa.Column('SupplierAddressID', sa.INTEGER, primary_key=True, nullable=False, autoincrement=True),
-        sa.Column('Supplier', sa.String(255), sa.ForeignKey('supplier.SupplierName'), nullable=False),
+        sa.Column('Supplier', sa.String(255), sa.ForeignKey('suppliers.SupplierName'), nullable=False),
         sa.Column('Country', sa.String(255), nullable=False),
         sa.Column('State', sa.String(255)),
         sa.Column('City', sa.String(255), nullable=False),
@@ -30,4 +30,4 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table('supplier_address')
+    op.drop_table('supplier_addresses')

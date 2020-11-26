@@ -4,7 +4,7 @@ from UI.manufacture_menu import manufacture_menu
 
 def main_menu():
     while True:
-        print("Main Menu")
+        print("\nMain Menu")
         print("=========")
         print("1. Parts")
         print("2. Manufacturers")
@@ -14,11 +14,14 @@ def main_menu():
         if selection == "1":
             parts_menu()
 
-        if selection == "2":
+        elif selection == "2":
             manufacture_menu()
 
-        if selection == "3":
+        elif selection == "3":
             break
+
+        else:
+            continue
 
 
 if __name__ == '__main__':

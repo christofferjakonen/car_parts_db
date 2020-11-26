@@ -18,7 +18,7 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'warehouse',
+        'warehouses',
         sa.Column('ProductNum', sa.Integer, sa.ForeignKey('parts.ProductNum')),
         sa.Column('Aisle', sa.String(45), primary_key=True, nullable=False),
         sa.Column('Bay', sa.String(45), primary_key=True, nullable=False),
@@ -31,4 +31,4 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table('warehouse')
+    op.drop_table('warehouses')

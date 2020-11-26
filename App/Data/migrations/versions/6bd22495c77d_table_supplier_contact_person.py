@@ -18,8 +18,8 @@ depends_on = None
 
 def upgrade():
     op.create_table(
-        'supplier_contact_person',
-        sa.Column('Supplier', sa.String(255), sa.ForeignKey('supplier.SupplierName'), nullable=False),
+        'supplier_contact_persons',
+        sa.Column('Supplier', sa.String(255), sa.ForeignKey('suppliers.SupplierName'), nullable=False),
         sa.Column('FullName', sa.String(255), nullable=False),
         sa.Column('PhoneNumber', sa.String(50), primary_key=True, nullable=False),
         sa.Column('Email', sa.String(255), nullable=False)
@@ -27,4 +27,4 @@ def upgrade():
 
 
 def downgrade():
-    op.drop_table('supplier_contact_person')
+    op.drop_table('supplier_contact_persons')
