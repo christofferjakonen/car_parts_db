@@ -21,11 +21,14 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 def get_all_parts():
     return session.query(Part).order_by(Part.ProductNum).all()
 
+
 def get_part_by_id(inputID):
     return session.query(Part).filter(Part.ProductNum == inputID).first()
 
+
 def get_part_by_name(partName):
     return session.query(Part).filter(Part.ProductName.like(f"%{partName}%")).all()
+
 
 def add_new_part(partID, partName=None, partMaker=None, description=None, cost=None, sellPrice=None):
     try:
@@ -42,9 +45,11 @@ def add_new_part(partID, partName=None, partMaker=None, description=None, cost=N
         newPart = Part(ProductNum=partID, Manufacture=maker.Manufacture, ProductName=partName, PartDescription=description, PurchasePrice=cost, SellPrice=sellPrice)
         session.add(newPart)
         session.commit()
+        session.close()
     except SQLAlchemyError as error:
         print(error.__dict__["orig"])
         session.rollback()
+
 
 def update_part_by_ID(partID, columnName, newValue=None):
     try:
@@ -64,9 +69,10 @@ def update_part_by_ID(partID, columnName, newValue=None):
 
         session.commit()
         session.close()
-    except:
-        print("!")
+    except SQLAlchemyError as error:
+        print(error.__dict__["orig"])
         session.rollback()
+
 
 def delete_part_by_ID(command):
     try:
@@ -74,29 +80,6 @@ def delete_part_by_ID(command):
         session.delete(stmt)
         session.commit()
         session.close()
-    except:
-        print("fuck")
+    except SQLAlchemyError as error:
+        print(error.__dict__["orig"])
         session.rollback()
-
-
-
-
-"""
-
-def get_customer_by_name(pattern):
-    # Post.query.filter(Post.tags.like(search)).all()
-    return session.query(Customer).filter(Customer.customerName.like(f'%{pattern}%')).all()
-
-
-def store_changes():
-   session.commit()
-
-
-def store_new_first_name(customer, new_value):
-    try:
-        customer.contactFirstName = new_value
-        # ....
-        session.commit()
-    except:
-        session.rollback()
-"""

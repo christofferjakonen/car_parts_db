@@ -1,3 +1,4 @@
+
 from Data.db import session
 from Data.models.car import Car
 from Data.models.car_has_parts import CarHasPart
@@ -12,24 +13,25 @@ from Data.models.supplier_contact_person import SupplierContactPerson
 from Data.models.supplier_has_manufacture import SupplierHasManufacture
 from Data.models.supplier_has_parts import SupplierHasPart
 from Data.models.warehouse import Warehouse
+from sqlalchemy.exc import SQLAlchemyError
 
 
-def show_all_manufacturers():
+def get_all_manufacturers():
     return session.query(Manufacture).all()
 
 
 def add_new_manufacturer(manufacturer, country="None", state="None", city="None", zip=1, address="None", phone="None"):
-    #try:
-    print("-- entering add_new_manufacturer --")
-    newManufacturer = Manufacture(Manufacture=manufacturer, Country=country, State=state, City=city, ZipCode=zip, StreetAddress=address, PhoneNumber=phone)
-    print("-- created new manufacturer --")
-    session.add(newManufacturer)
-    print("-- added new manufacturer to session --")
-    session.commit()
-    session.close()
-    #except:
-    #    print("-- could not add manufacture --")
-    #    session.rollback()
+    try:
+        print("-- entering add_new_manufacturer --")
+        newManufacturer = Manufacture(Manufacture=manufacturer, Country=country, State=state, City=city, ZipCode=zip, StreetAddress=address, PhoneNumber=phone)
+        print("-- created new manufacturer --")
+        session.add(newManufacturer)
+        print("-- added new manufacturer to session --")
+        session.commit()
+        session.close()
+    except SQLAlchemyError as error:
+        print(error.__dict__["orig"])
+        session.rollback()
 
 
 def update_part_by_ID(manufacturer, columnName, newValue=None):
@@ -41,7 +43,7 @@ def update_part_by_ID(manufacturer, columnName, newValue=None):
 
         session.commit()
         session.close()
-    except:
-        print("!")
+    except SQLAlchemyError as error:
+        print(error.__dict__["orig"])
         session.rollback()
 
