@@ -3,7 +3,7 @@ import sqlalchemy as sa
 from sqlalchemy.orm import relationship
 
 
-class CarHasPart(Base):car_has_parts
+class CarHasPart(Base):
     __tablename__ = 'car_has_parts'
 
     CarID = sa.Column(sa.Integer, sa.ForeignKey('cars.CarID', onupdate="CASCADE", ondelete="CASCADE"), primary_key=True, nullable=False)
