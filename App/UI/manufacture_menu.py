@@ -22,18 +22,14 @@ def manufacture_menu():
             print("\n=========")
             print("Add new part")
 
-            partId = input("Part Id: ")
-            if partId and partId.isnumeric():
+            name = input("Manufacturer name: ")
+            if name:
                 pass
             else:
                 print("New part needs Id")
                 continue
-            partName = input("Part name: ")
-            manufacturer = input("Parts manufacturer: ")
-            partDescription = input("Part description: ")
-            purchasePrice = input("Purchase price: ")
-            sellPrice = input("Sell price: ")
-            add_new_manufacturer
+
+            add_new_manufacturer(name, country, state, city, zipnum, address, phone)
             print("=========")
 
         elif selection == "5":
