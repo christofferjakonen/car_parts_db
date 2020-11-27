@@ -21,6 +21,8 @@ def get_all_customers():
 
 
 def get_all_reg_numbers():
+
+
     return session.query(RegNumber).order_by(RegNumber.CustomerID).all()
 
 

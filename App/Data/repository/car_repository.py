@@ -16,33 +16,25 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy import select, join
 
 
-#def get_all_cars():
-#    return session.query(Car).all()
-
 def get_all_cars():
-    reg = session.query(Car.Model).join(RegNumber)
-
-    print(reg)
-    return reg
-
+    return session.query(Car).all()
 
 
 def get_reg_number_for_car(id):
-    reg_num = session.query(RegNumber.RegNumber).filter(RegNumber.CarID == id).first()
-    cus_id = session.query(RegNumber.CustomerID).filter(RegNumber.CarID == id).first()
-    cus_name = session.query(Customer.CustomerName).filter(Customer.CustomerID == cus_id[0]).first()
-    return reg_num[0], cus_name[0]
+    reg_num = session.query(RegNumber.RegNumber).filter(RegNumber.CarID == id).all()
+
+    cus_id = session.query(RegNumber.CustomerID).filter(RegNumber.CarID == id).all()
+
+    return reg_num, cus_id
 
 
 def view_parts_for_car_id(id):
-    part_id = session.query(CarHasPart.PartsProductNum).filter(CarHasPart.CarID == id).first()
-    print(part_id)
-    part = session.query(Part.ProductName).filter(Part.ProductNum == part_id[0]).first()
-    return part
+
+    return session.query(CarHasPart.PartsProductNum).filter(CarHasPart.CarID == id).all()
 
 
 def get_car_by_id(id):
-    return session.query(Car).filter(Car.CarID == id).first()
+    return session.query(Car).filter(Car.CarID == id).all()
 
 
 def store_changes():

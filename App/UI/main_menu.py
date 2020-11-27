@@ -15,10 +15,10 @@ def main_menu():
         if selection == "1":
             customers_menu()
 
-        if selection == "2":
+        elif selection == "2":
             car_menu()
 
-        else:
+        elif selection == '4':
             break
 
 

@@ -41,8 +41,11 @@ def customers_menu():
 
         elif selection == "4":
             reg_numbers = get_all_reg_numbers()
-            for reg_number in reg_numbers:
-                print(reg_number)
+
+            for reg_num in reg_numbers:
+                print(reg_num)
+
+
 
 
         elif selection == "5":
@@ -78,20 +81,10 @@ def customers_menu():
             id = input("Enter Customer Id: ")
             reg_number = get_reg_number_for_customer(id)
 
-
-
-            id2 = []
-
             for i in range(len(reg_number[0])):
-                id2.append(reg_number[1][i][0])
+                print(f"Registration number: {reg_number[0][i][0]}, CarID: {reg_number[1][i][0]}\n")
 
-            for i in range(len(id2)):
-                id2[i] = get_car_by_id(id2[i])
-
-            for i in range(len(reg_number[0])):
-                print(f"\n Registration number: {reg_number[0][i][0]}, CarID: {id2[i].CarID}, Model: {id2[i].Model}, Brand: {id2[i].Brand}, Color: {id2[i].Color}, Model Year: {id2[i].ModelYear} \n")
-
-
-
-        else:
+        elif selection == "11":
             break
+
+

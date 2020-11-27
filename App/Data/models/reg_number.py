@@ -13,4 +13,4 @@ class RegNumber(Base):
     RegNumber_Car = relationship("Car", back_populates="Car_RegNumber")
 
     def __repr__(self):
-        return f'{self.CustomerID}, {self.RegNumber}, {self.CarID}'
+        return f'Customer ID: {self.CustomerID}, Registration Number: {self.RegNumber}, Car ID: {self.CarID}'

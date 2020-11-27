@@ -9,7 +9,7 @@ def car_menu():
         print("Car Menu")
         print("==============")
         print("1. View All Cars")
-        print("2. View Cars by Id")
+        print("2. View Attributes of Car ID")
         print("3. View Registration number and Customer for CarID")
         print("4. Add new Car")
         print("5. Delete Car")
@@ -25,18 +25,20 @@ def car_menu():
 
         elif selection == "2":
             id = input("Enter Car Id: ")
-            car = get_car_by_id(id)
-            if car:
-                print(car)
+            cars = get_car_by_id(id)
+            if cars:
+                for car in cars:
+                    print(car)
             else:
                 print("Could not find car with id: ", id)
 
 
         elif selection == "3":
-            reg = input("Enter CarID: ")
-            reg_number = get_reg_number_for_car(reg)
-            print(f"\n Registration number: {reg_number[0]}, Customer: {reg_number[1]}\n")
+            id = input("Enter Car Id: ")
+            reg_number = get_reg_number_for_car(id)
 
+            for i in range(len(reg_number[0])):
+                print(f"Registration number: {reg_number[0][i][0]}, Customer ID: {reg_number[1][i][0]}\n")
 
         elif selection == "4":
 
@@ -47,7 +49,6 @@ def car_menu():
             model_year = input("Enter the model_year of the car: ")
             store_new_car(model, brand, color, model_year)
 
-
         elif selection == "5":
 
             id = int(input("Enter Car Id to be removed: "))
@@ -57,8 +58,13 @@ def car_menu():
 
             id = int(input("Enter ID for Car to view compatible parts"))
             parts = view_parts_for_car_id(id)
-            print(parts)
 
-        else:
+            for i in range(len(parts)):
+                print(parts[i])
+
+        elif selection == "7":
             break
+
+
+
 

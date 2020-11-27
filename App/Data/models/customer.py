@@ -8,7 +8,7 @@ class Customer(Base):
 
     CustomerID = sa.Column(sa.Integer, primary_key=True, autoincrement=True, nullable=False)
     CustomerName = sa.Column(sa.String(255), nullable=False)
-    Customer_RegNumber = relationship("RegNumber", back_populates="RegNumber_Customer")
+    Customer_RegNumber = relationship("RegNumber", back_populates="RegNumber_Customer", cascade='all, delete-orphan')
 
     def __repr__(self):
-        return f'{self.CustomerID}, {self.CustomerName}'
+        return f'Customer ID: {self.CustomerID}, Customer Name: {self.CustomerName}'
