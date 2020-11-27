@@ -1,7 +1,6 @@
 from Data.db import Base
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
-from Data.models.part import Part
 
 
 class SupplierHasPart(Base):

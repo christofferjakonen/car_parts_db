@@ -66,12 +66,23 @@ def get_supplier_contact_person_by_email(email):
     return sr.get_supplier_contact_person_by_email(email)
 
 
+def add_new_supplier_contact(supplier_name, contact_name, phone_num, email):
+    return sr.add_new_supplier_contact(supplier_name, contact_name, phone_num, email)
+
+
+def delete_supplier_contact_person(contact_name):
+    return sr.delete_supplier_contact_person(contact_name)
+
 
 # supplier addresses
 
 
 def get_all_supplier_addresses():
     return sr.get_all_supplier_addresses()
+
+
+def get_supplier_address_by_id(address_id):
+    return sr.get_supplier_address_by_id(address_id)
 
 
 def get_supplier_address_by_name(supplier_name):

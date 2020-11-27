@@ -98,9 +98,18 @@ def get_supplier_contact_person_by_supplier(supplier):
     return session.query(SupplierContactPerson).filter(SupplierContactPerson.Supplier.like(f'%{supplier}%')).all()
 
 
-def add_new_supplier_contact_person(supplier, name, phone_num, email):
-    new_supplier_contact_person = SupplierContactPerson(Supplier=supplier, FullName=name, PhoneNumber=phone_num, Email=email)
+def add_new_supplier_contact(supplier, contact_name, phone_num, email):
+    new_supplier_contact_person = SupplierContactPerson(Supplier=supplier, FullName=contact_name, PhoneNumber=phone_num, Email=email)
     session.add(new_supplier_contact_person)
+    session.commit()
+    session.close()
+
+
+def delete_supplier_contact_person(contact_name):
+    contact = session.query(SupplierContactPerson).get(contact_name)
+    print(contact)
+    print(type(contact))
+    session.delete(contact)
     session.commit()
     session.close()
 
@@ -114,6 +123,10 @@ def get_all_supplier_addresses():
 
 def get_supplier_address_by_name(supplier_name):
     return session.query(SupplierAddress).filter(SupplierAddress.Supplier.like(f'%{supplier_name}%')).all()
+
+
+def get_supplier_address_by_id(address_id):
+    return session.query(SupplierAddress).filter(SupplierAddress.SupplierAddressID.like(f'%{address_id}%')).all()
 
 
 def get_supplier_address_by_country(country):
@@ -214,3 +227,6 @@ def get_all_supplier_manufacturers():
 
 # parts
 
+
+def get_all_supplier_parts():
+    return session.query(SupplierHasPart).all()

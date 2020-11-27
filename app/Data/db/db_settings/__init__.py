@@ -1,0 +1,5 @@
+DB_USER = 'pyuser'
+DB_PASSWORD = 'wasd123'
+DB_HOST = 'localhost'
+DB_PORT = '33006'
+DB_DATABASE = 'car_parts_db'

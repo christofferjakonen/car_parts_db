@@ -1,5 +1,4 @@
 from Controllers.supplier_controller import *
-from UI.suppliers_menu import suppliers_menu
 
 
 def suppliers_contact_person_menu():
@@ -21,28 +20,44 @@ def suppliers_contact_person_menu():
             contacts = get_all_supplier_contact_people()
             for contact in contacts:
                 print(contact)
+
         elif choice == "2":
             supplier_name = input("Enter Supplier: ")
-            contact = get_supplier_contact_person_by_supplier(supplier_name)
-            for key, contact in contact.items():
-                print(f"{key}. {contact}")
+            contacts = get_supplier_contact_person_by_supplier(supplier_name)
+            for contact in contacts:
+                print(contact)
+
         elif choice == "3":
             name = input("Enter Name: ")
-            contact = get_supplier_contact_person_by_name(name)
-            for key, contact in contact.items():
-                print(f"{key}. {contact}")
+            contacts = get_supplier_contact_person_by_name(name)
+            for contact in contacts:
+                print(contact)
+
         elif choice == "4":
             state = input("Enter Phone Number: ")
-            phone_num = get_supplier_contact_person_by_phone_number(state)
-            for key, phone_num in phone_num.items():
-                print(f"{key}. {phone_num}")
+            contacts = get_supplier_contact_person_by_phone_number(state)
+            for contact in contacts:
+                print(contact)
+
         elif choice == "5":
             email = input("Enter Email: ")
-            contact = get_supplier_contact_person_by_email(email)
-            for key, contact in contact.items():
-                print(f"{key}. {contact}")
+            contacts = get_supplier_contact_person_by_email(email)
+            for contact in contacts:
+                print(contact)
+
+        elif choice == "6":
+            supplier_name = input("Name Of Supplier: ")
+            contact_name = input("Fist And Last Name Of Contact: ")
+            phone_num = input("Phone Number: ")
+            email = input("Email: ")
+            add_new_supplier_contact(supplier_name, contact_name, phone_num, email)
+
         elif choice == "7":
-            pass
+            contacts = get_all_supplier_contact_people()
+            for contact in contacts:
+                print(contact)
+            contact_name = input("Enter the name of contact you want to delete: ")
+            delete_supplier_contact_person(contact_name)
 
         elif choice == "8":
-            suppliers_menu()
+            break
