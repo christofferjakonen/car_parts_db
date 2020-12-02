@@ -3,3 +3,8 @@ DB_PASSWORD = 'wasd123'
 DB_HOST = 'localhost'
 DB_PORT = '33006'
 DB_DATABASE = 'car_parts_db'
+
+MONGO_USER = 'root'
+MONGO_PASSWORD = 'wasd123'
+MONGO_HOST = 'localhost'
+MONGO_PORT = '27016'

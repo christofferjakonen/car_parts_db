@@ -10,9 +10,10 @@ def suppliers_contact_person_menu():
         print("3. Find A Contact Person For A Supplier By Name")
         print("4. Find A Contact Person For A Supplier By Phone Number")
         print("5. Find A Contact Person For A Supplier By Email")
-        print("6. Edit A Contact Person")
-        print("7. Delete A Contact Person")
-        print("8. Exit Supplier Contact People Menu")
+        print("6. Add A Contact Person")
+        print("7. Edit A Contact Person")
+        print("8. Delete A Contact Person")
+        print("9. Exit Supplier Contact People Menu")
 
         choice = input("> ")
 
@@ -53,11 +54,14 @@ def suppliers_contact_person_menu():
             add_new_supplier_contact(supplier_name, contact_name, phone_num, email)
 
         elif choice == "7":
+            pass
+
+        elif choice == "8":
             contacts = get_all_supplier_contact_people()
             for contact in contacts:
                 print(contact)
             contact_name = input("Enter the name of contact you want to delete: ")
             delete_supplier_contact_person(contact_name)
 
-        elif choice == "8":
+        elif choice == "9":
             break

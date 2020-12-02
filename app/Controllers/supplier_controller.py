@@ -16,8 +16,7 @@ def delete_supplier(supplier_name):
 
 
 def get_supplier_by_name(supplier_name):
-    suppliers = sr.get_supplier_by_name(supplier_name)
-    return {i+1: supplier for i, supplier in enumerate(suppliers)}
+    return sr.get_supplier_by_name(supplier_name)
 
 
 def get_supplier_by_phone_number(phone_num):

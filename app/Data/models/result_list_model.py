@@ -1,6 +1,9 @@
-def main():
-    pass
+class ResultList(list):
+    def first_or_none(self):
+        return self[0] if len(self) > 0 else None
 
+    def last_or_none(self):
+        return self[-1] if len(self) > 0 else None
 
-if __name__ == "__main__":
-    main()
+    def all_or_none(self):
+        return self if len(self) > 0 else None

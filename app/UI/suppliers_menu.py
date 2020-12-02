@@ -29,9 +29,8 @@ def suppliers_menu():
 
         elif choice == "2":
             supplier_name = input("Enter name of supplier: ")
-            suppliers = get_supplier_by_name(supplier_name)
-            for supplier in suppliers:
-                print(supplier)
+            supplier = get_supplier_by_name(supplier_name)
+            print(supplier)
 
         elif choice == "3":
             phone_num = input("Enter phone number of supplier: ")
@@ -85,7 +84,7 @@ def suppliers_menu():
             suppliers = get_all_suppliers()
             for supplier in suppliers:
                 print(supplier)
-            name = input("Enter The Name Of Supplier You Want To Delete: ")
+            name = input("Enter The Id Of Supplier You Want To Delete: ")
             delete_supplier(name)
 
         elif choice == "8":
