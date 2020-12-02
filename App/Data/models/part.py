@@ -20,4 +20,4 @@ class Part(Base):
 
 
     def __repr__(self):
-        return f'{self.ProductNum}, {self.Manufacture}, {self.ProductName}, {self.PurchasePrice}, {self.SellPrice}, {self.PartDescription}'
+        return f'Part Nr: {self.ProductNum}, Product Name: {self.ProductName}, Manufacturer: {self.Manufacture}, Purchase Price: {self.PurchasePrice}, Sell Price: {self.SellPrice}, \nPart Description: {self.PartDescription}'

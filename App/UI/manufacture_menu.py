@@ -20,13 +20,13 @@ def manufacture_menu():
         elif selection == "4":
             # add new
             print("\n=========")
-            print("Add new part")
+            print("Add new manufacturer")
 
             name = input("Manufacturer name: ")
             if name:
                 pass
             else:
-                print("New part needs Id")
+                print("Manufacturer needs a name")
                 continue
 
             add_new_manufacturer(name, country, state, city, zipnum, address, phone)

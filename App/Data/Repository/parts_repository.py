@@ -83,3 +83,7 @@ def delete_part_by_ID(command):
     except SQLAlchemyError as error:
         print(error.__dict__["orig"])
         session.rollback()
+
+
+def get_cars_for_part_id(part_id):
+    return session.query(CarHasPart.CarID).filter(CarHasPart.PartsProductNum == part_id).all()

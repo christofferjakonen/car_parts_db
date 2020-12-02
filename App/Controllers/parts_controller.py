@@ -7,12 +7,15 @@ def get_all_parts():
 
 def get_part_by_id(inputID):
     part = pr.get_part_by_id(inputID)
+    print(part)
     result = part if part else "No part was found"
     return result
+
 
 def get_part_by_name(partName):
     parts = pr.get_part_by_name(partName)
     return {i+1: part for i, part in enumerate(parts)}
+
 
 def add_new_part(partId, partName=None, manufacturer="None", partDescription=None, purchasePrice=None, sellPrice=None):
     return pr.add_new_part(partId, partName, manufacturer, partDescription, purchasePrice, sellPrice)
@@ -20,6 +23,7 @@ def add_new_part(partId, partName=None, manufacturer="None", partDescription=Non
 
 def delete_part_by_ID(command):
     return pr.delete_part_by_ID(command)
+
 
 def update_part_by_ID(partID, columnNr):
     if columnNr == 1:
@@ -40,3 +44,19 @@ def update_part_by_ID(partID, columnNr):
 
     newValue = input("new value: ")
     return pr.update_part_by_ID(partID, columnName, newValue)
+
+
+def get_cars_for_part(id):
+    car_id_list = pr.get_cars_for_part_id(id)
+    car_list = []
+    for i in range(len(car_id_list)):
+        car_list.append(car_id_list[i][0])
+    return car_list
+# def view_parts_for_car_id(id):
+#     car_id_part = cr.view_parts_for_car_id(id)
+#
+#     car_parts = []
+#     for i in range(len(car_id_part)):
+#         car_parts.append(pr.get_part_by_id(car_id_part[i][0]))
+#
+#     return car_parts
