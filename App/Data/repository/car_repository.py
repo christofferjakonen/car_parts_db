@@ -44,16 +44,19 @@ def store_changes():
 def store_new_car(brand, model, color, model_year):
     try:
 
-        new_car = Car(Brand=brand, Model=model, Color=color, ModelYear=model_year)
-        session.add(new_car)
-        session.commit()
-        session.close()
+        new_car = Car({
+            'brand': brand,
+            'model': model,
+            'color': color,
+            'model_year': model_year
+        })
+        new_car.save()
         print('Done!')
 
-    except SQLAlchemyError as error:
 
-        print(error.__dict__["orig"])
-        session.rollback()
+    except:
+
+        print('error')
 
 
 def delete_car(id):
