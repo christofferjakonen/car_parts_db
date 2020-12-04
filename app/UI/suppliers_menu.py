@@ -10,7 +10,7 @@ def suppliers_menu():
         print("1. View All Suppliers")
         print("2. Find Supplier By Name")
         print("3. Find Supplier By Phone Number")
-        print("4. Find Supplier By Name Email")
+        print("4. Find Supplier By Email")
         print("5. Add New Supplier")
         print("6. Edit A Supplier")
         print("7. Delete A Supplier")
@@ -35,14 +35,12 @@ def suppliers_menu():
         elif choice == "3":
             phone_num = input("Enter phone number of supplier: ")
             suppliers = get_supplier_by_phone_number(phone_num)
-            for supplier in suppliers:
-                print(supplier)
+            print(suppliers)
 
         elif choice == "4":
             email = input("Enter email of supplier: ")
             suppliers = get_supplier_by_email(email)
-            for supplier in suppliers:
-                print(supplier)
+            print(suppliers)
 
         elif choice == "5":
             supplier_name = input("Name Of Supplier: ")

@@ -24,7 +24,7 @@ def delete_supplier(supplier_id):
 
 
 def get_supplier_by_name(supplier_name):
-    return Supplier.find(**{'SupplierName': supplier_name}).all_or_none()
+    return Supplier.find(**{'SupplierName': supplier_name}).first_or_none()
 
 
 def get_supplier_by_phone_number(phone_num):
@@ -71,15 +71,37 @@ def get_supplier_contact_person_by_supplier(supplier):
 
 
 def add_new_supplier_contact(supplier, contact_name, phone_num, email):
-    contact = ({
+    contact = SupplierContactPerson({
         'Supplier': supplier,
         'FullName': contact_name,
         'PhoneNumber': phone_num,
         'Email': email
     })
 
+    contact.save()
+    print("Done")
 
-def delete_supplier_contact_person(contact_name):
+
+def delete_supplier_contact_person(contact_id):
+    SupplierContactPerson.delete(_id=ObjectId(contact_id))
+
+
+def store_edited_supplier_contact_supplier(supplier_name, new_value):
+    supplier = {"Supplier": supplier_name}
+    new_supplier = {"$set": {"Supplier": new_value}}
+
+    mdb.SupplierContactPerson.update(supplier, new_supplier)
+
+
+def store_edited_supplier_contact_person(contact_name, new_value):
+    pass
+
+
+def store_edited_supplier_contact_phone_number(phone_num, new_value):
+    pass
+
+
+def store_edited_supplier_contact_email(email, new_value):
     pass
 
 
@@ -126,7 +148,7 @@ def get_supplier_address_by_street_address(street_address):
 
 
 def add_new_supplier_address(supplier, country, state, city, zip_code, street_address):
-    address = ({
+    address = SupplierAddress({
         'Supplier': supplier,
         'Country': country,
         'State': state,
@@ -134,6 +156,9 @@ def add_new_supplier_address(supplier, country, state, city, zip_code, street_ad
         'ZipCode': zip_code,
         'StreetAddress': street_address
     })
+
+    address.save()
+    print("Done")
 
 
 def store_edited_supplier_address_name(supplier_address, new_value):
@@ -160,8 +185,8 @@ def store_edited_supplier_address_street_address(supplier_address, new_value):
     pass
 
 
-def delete_supplier_address(supplier_name):
-    pass
+def delete_supplier_address(address_id):
+    SupplierAddress.delete(_id=ObjectId(address_id))
 
 
 # manufacturers

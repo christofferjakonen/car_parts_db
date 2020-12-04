@@ -1,6 +1,7 @@
 from Controllers.supplier_controller import *
 
 
+
 def supplier_address_menu():
     while True:
         print("Supplier Addresses Menu")
@@ -22,52 +23,51 @@ def supplier_address_menu():
 
         if choice == "1":
             addresses = get_all_supplier_addresses()
-            for address in addresses:
-                print(address)
+            print(addresses)
 
         elif choice == "0":
             addresses = get_all_supplier_addresses()
-            for address in addresses:
-                print(address)
+            print(addresses)
             address_id = input("Enter Id For Supplier Address: ")
             int(address_id)
-            for o in get_supplier_address_by_id(address_id):
-                print(o)
+            _id = get_supplier_address_by_id(address_id)
+            print(_id)
 
         elif choice == "3":
             country = input("Enter Country: ")
             supplier_country = get_supplier_address_by_country(country)
-            for key, supplier_country in supplier_country.items():
-                print(f"{key}. {supplier_country}")
+            print(supplier_country)
 
         elif choice == "4":
             city = input("Enter City: ")
             supplier_address = get_supplier_address_by_city(city)
-            for key, supplier_address in supplier_address.items():
-                print(f"{key}. {supplier_address}")
+            print(supplier_address)
 
         elif choice == "5":
             state = input("Enter State: ")
             supplier_address = get_supplier_address_by_state(state)
-            for key, supplier_address in supplier_address.items():
-                print(f"{key}. {supplier_address}")
+            print(supplier_address)
 
         elif choice == "6":
             zip_code = input("Enter Zip Code: ")
             zip_code = int(zip_code)
             supplier_address = get_supplier_address_by_zip_code(zip_code)
             print(supplier_address)
-            for key, supplier_address in supplier_address.items():
-                print(f"{key}. {supplier_address}")
 
         elif choice == "7":
             street_address = input("Enter Street Address: ")
             supplier_address = get_supplier_address_by_street_address(street_address)
-            for key, supplier_address in supplier_address.items():
-                print(f"{key}. {supplier_address}")
+            print(supplier_address)
 
         elif choice == "8":
-            pass
+            supplier_name = input("Name Of Supplier: ")
+            country = input("Country: ")
+            state = input("State: ")
+            city = input("City: ")
+            zip_code = input("Zip Code: ")
+            int(zip_code)
+            street_address = input("Street Address: ")
+            add_new_supplier_address(supplier_name, country, state, city, zip_code, street_address)
 
         elif choice == "9":
             supplier_addresses = get_all_supplier_addresses()

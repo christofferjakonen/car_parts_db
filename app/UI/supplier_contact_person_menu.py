@@ -19,32 +19,27 @@ def suppliers_contact_person_menu():
 
         if choice == "1":
             contacts = get_all_supplier_contact_people()
-            for contact in contacts:
-                print(contact)
+            print(contacts)
 
         elif choice == "2":
             supplier_name = input("Enter Supplier: ")
             contacts = get_supplier_contact_person_by_supplier(supplier_name)
-            for contact in contacts:
-                print(contact)
+            print(contacts)
 
         elif choice == "3":
             name = input("Enter Name: ")
             contacts = get_supplier_contact_person_by_name(name)
-            for contact in contacts:
-                print(contact)
+            print(contacts)
 
         elif choice == "4":
             state = input("Enter Phone Number: ")
             contacts = get_supplier_contact_person_by_phone_number(state)
-            for contact in contacts:
-                print(contact)
+            print(contacts)
 
         elif choice == "5":
             email = input("Enter Email: ")
             contacts = get_supplier_contact_person_by_email(email)
-            for contact in contacts:
-                print(contact)
+            print(contacts)
 
         elif choice == "6":
             supplier_name = input("Name Of Supplier: ")
@@ -54,7 +49,37 @@ def suppliers_contact_person_menu():
             add_new_supplier_contact(supplier_name, contact_name, phone_num, email)
 
         elif choice == "7":
-            pass
+            contacts = get_all_supplier_contact_people()
+            for contact in contacts:
+                print(contact)
+
+            name = input("Enter name of supplier: ")
+            contacts = get_supplier_contact_person_by_supplier(name)
+            for contact in contacts:
+                print(contact)
+
+            edit = input("Enter id for supplier you want to edit: ")
+
+            contact = contacts[edit]
+
+            print("1. Supplier:", contact.Supplier)
+            print("2. Full Name:", contact.FullName)
+            print("3. Phone Number:", contact.PhoneNumber)
+            print("4. Email:", contact.Email)
+
+            column = input("Enter number of the column you want to edit: ")
+            if column == "1":
+                new_value = input("Enter new supplier name: ")
+                store_edited_supplier_contact_supplier(contact, new_value)
+            elif column == "2":
+                new_value = input("Enter new name: ")
+                store_edited_supplier_contact_person(contact, new_value)
+            elif column == "3":
+                new_value = input("Enter new phone number: ")
+                store_edited_supplier_contact_phone_number(contact, new_value)
+            elif column == "4":
+                new_value = input("Enter new email: ")
+                store_edited_supplier_contact_email(contact, new_value)
 
         elif choice == "8":
             contacts = get_all_supplier_contact_people()
