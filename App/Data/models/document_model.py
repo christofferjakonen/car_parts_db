@@ -1,6 +1,6 @@
-
+from .result_list_model import ResultList
 from abc import ABC
-
+import re
 
 
 
@@ -39,3 +39,8 @@ class Document(dict, ABC):
     @classmethod
     def delete(cls, **kwargs):
         cls.collection.delete_many(kwargs)
+
+    @classmethod
+    def update(cls, **kwargs):
+        cls.collection.update()
+
