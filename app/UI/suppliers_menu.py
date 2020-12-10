@@ -7,14 +7,16 @@ def suppliers_menu():
         print("--------------")
         print("1. View All Suppliers")
         print("2. Find Supplier By Name")
-        print("3. Find Supplier By Phone Number")
-        print("4. Find Supplier By Email")
-        print("5. Add New Supplier")
-        print("6. Edit A Supplier")
-        print("7. Delete A Supplier")
-        print("8. View All Parts Suppliers Have")
-        print("9. View All Manufacturers For Suppliers")
-        print("10. Exit Supplier Menu")
+        print("3. Add New Supplier")
+        print("4. Add A Part")
+        print("5. Add An Address")
+        print("6. Add A Contact Person")
+        print("7. Edit A Supplier")
+        print("8. Delete A Supplier")
+        print("9. Delete A Part")
+        print("10. Delete An Address")
+        print("11. Delete A Contact Person")
+        print("12. Exit Supplier Menu")
 
         choice = input("> ")
 
@@ -30,50 +32,88 @@ def suppliers_menu():
             print(supplier)
 
         elif choice == "3":
-            phone_num = input("Enter phone number of supplier: ")
-            suppliers = get_supplier_by_phone_number(phone_num)
-            print(suppliers)
-
-        elif choice == "4":
-            email = input("Enter email of supplier: ")
-            suppliers = get_supplier_by_email(email)
-            print(suppliers)
-
-        elif choice == "5":
             supplier_name = input("Name Of Supplier: ")
 
-            manufacturer_list = []
+            part_list = []
 
             while True:
-                manufacture = input("Manufacturer: ")
-                manufacturer_list.append(manufacture)
-                print("Do you want to add another manufacturer?")
-                add_manufacturer = input("Yes or No: ")
-                if add_manufacturer.lower() == "n" or add_manufacturer.lower() == "no":
+                part = input("Part Id: ")
+                part_list.append(part)
+                print("Do you want to add another part?")
+                add_part = input("Yes or No: ")
+                if add_part.lower() == "n" or add_part.lower() == "no":
                     break
 
+            address_list = []
             print("--Supplier Address--")
-            country = input("Country: ")
-            state = input("State: ")
-            city = input("City: ")
-            zip_code = input("Zip Code: ")
-            street_address = input("Street Address: ")
+            while True:
+                country = input("Country: ")
+                state = input("State: ")
+                city = input("City: ")
+                zip_code = input("Zip Code: ")
+                street_address = input("Street Address: ")
+                phone_num = input("Phone Number: ")
+                address = create_new_supplier_address(country, state, city, zip_code, street_address, phone_num)
+                address_list.append(address)
+                print("Do you want to add another address?")
+                add_address = input("Yes or No: ")
+                if add_address.lower() == "n" or add_address.lower() == "no":
+                    break
 
             contact_list = []
-
+            print("--Contact Person--")
             while True:
-                print("--Contact Person--")
                 contact_name = input("Name: ")
                 phone_num = input("Phone Number: ")
                 email = input("Email: ")
-                contact = {"ContactPerson": contact_name, "Phone Number": phone_num, "Email": email}
+                contact = create_new_contact_person(contact_name, phone_num, email)
                 contact_list.append(contact)
                 print("Do you want to add another contact person?")
                 add_contact = input("Yes or No: ")
                 if add_contact.lower() == "n" or add_contact.lower() == "no":
                     break
 
-            add_new_supplier(supplier_name, manufacturer_list, country, state, city, zip_code, street_address, contact_list)
+            add_new_supplier(supplier_name, part_list, address_list, contact_list)
+
+        elif choice == "4":
+            suppliers = get_all_suppliers()
+            for supplier in suppliers:
+                print(supplier)
+                print("------------------------------")
+
+            supplier_name = input("Enter supplier you want to add a part for: ")
+
+            new_part = input("Part Id: ")
+            add_new_part(supplier_name, new_part)
+
+            #print("Do you want to add another part?")
+            #add_part = input("Yes or No: ")
+            #if add_part.lower() == "n" or add_part.lower() == "no":
+                #break
+
+        elif choice == "5":
+            suppliers = get_all_suppliers()
+            for supplier in suppliers:
+                print(supplier)
+                print("------------------------------")
+
+            supplier_name = input("Enter supplier you want to add an address for: ")
+
+            while True:
+                country = input("Country: ")
+                state = input("State: ")
+                city = input("City: ")
+                zip_code = input("Zip Code: ")
+                street_address = input("Street Address: ")
+                phone_num = input("Phone Number: ")
+
+                new_address = create_new_supplier_address(country, state, city, zip_code, street_address, phone_num)
+                add_new_supplier_address(supplier_name, new_address)
+
+                print("Do you want to add another address?")
+                add_address = input("Yes or No: ")
+                if add_address.lower() == "n" or add_address.lower() == "no":
+                    break
 
         elif choice == "6":
             suppliers = get_all_suppliers()
@@ -81,63 +121,104 @@ def suppliers_menu():
                 print(supplier)
                 print("------------------------------")
 
+            supplier_name = input("Enter supplier you want to add a contact person for: ")
+
+            while True:
+                contact_name = input("Name: ")
+                phone_num = input("Phone Number: ")
+                email = input("Email: ")
+
+                new_contact = create_new_contact_person(contact_name, phone_num, email)
+                add_new_contact_person(supplier_name, new_contact)
+
+                print("Do you want to add another contact person?")
+                add_contact = input("Yes or No: ")
+                if add_contact.lower() == "n" or add_contact.lower() == "no":
+                    break
+
+        elif choice == "7":
+            suppliers = get_all_suppliers()
+            for supplier in suppliers:
+                print(supplier)
+                print("------------------------------")
+
             print("1. Supplier")
-            print("2. Manufacturer")
+            print("2. Part")
             print("3. Address")
             print("4. Contact Person")
 
             field = input("Enter number of the field you want to edit: ")
 
             if field == "1":
-                new_value = input("Enter new supplier: ")
-                store_edited_supplier_name(supplier, new_value)
+                supplier_name = input("Enter name of supplier you want to edit: ")
+                new_contact = input("Enter new supplier: ")
+                store_edited_supplier_name(supplier_name, new_contact)
 
             elif field == "2":
                 while True:
-                    new_value = input("Enter new manufacturer: ")
-                    store_edited_supplier_manufacturer(supplier, new_value)
-                    print("Do you want to edit another manufacturer?")
-                    edit_manufacturer = input("Yes or No: ")
-                    if edit_manufacturer.lower() == "n" or edit_manufacturer.lower() == "no":
+                    supplier_name = input("Enter supplier to edit: ")
+                    supplier = get_supplier_by_name(supplier_name)
+                    for i, part in enumerate(supplier.Parts, start=1):
+                        print(f"{i}: {part}")
+
+                    part_index = input("What part do you want to edit: ")
+                    part_index = int(part_index) - 1
+
+                    new_part = input("Enter new part: ")
+                    store_edited_supplier_part(supplier_name, new_part, part_index)
+
+                    print("Do you want to edit another part?")
+                    edit_part = input("Yes or No: ")
+                    if edit_part.lower() == "n" or edit_part.lower() == "no":
                         break
 
             elif field == "3":
-                print("What do you want to edit?")
-                print("1. Country")
-                print("2. State")
-                print("3. City")
-                print("4. Zip Code")
-                print("5. Street Address")
-                field_to_edit = input("> ")
+                while True:
+                    supplier_name = input("Enter supplier to edit: ")
+                    supplier = get_supplier_by_name(supplier_name)
+                    for i, address in enumerate(supplier.Address, start=1):
+                        print(f"{i}: {address}")
 
-                if field_to_edit == "1":
-                    new_value = input("Enter new country: ")
-                elif field_to_edit == "2":
-                    new_value = input("Enter new state: ")
-                elif field_to_edit == "3":
-                    new_value = input("Enter new city: ")
-                elif field_to_edit == "4":
-                    new_value = input("Enter new zip code: ")
-                elif field_to_edit == "5":
-                    new_value = input("Enter new street address: ")
+                    manufacturer_index = input("What address do you want to edit: ")
+                    manufacturer_index = int(manufacturer_index) - 1
+
+                    new_country = input("Enter country: ")
+                    new_state = input("Enter state: ")
+                    new_city = input("Enter city: ")
+                    new_zip_code = input("Enter zip code: ")
+                    new_street_address = input("Enter street address: ")
+                    new_phone_num = input("Enter phone number: ")
+
+                    new_address = create_new_supplier_address(new_country, new_state, new_city, new_zip_code, new_street_address, new_phone_num)
+                    store_edited_supplier_address(supplier_name, new_address, manufacturer_index)
+
+                    print("Do you want to edit another address?")
+                    edit_address = input("Yes or No: ")
+                    if edit_address.lower() == "n" or edit_address.lower() == "no":
+                        break
 
             elif field == "4":
-                supplier_name = input("Enter supplier name: ")
-                supplier = get_supplier_by_name(supplier_name)
-                for i, contact in enumerate(supplier.ContactPerson, start=1):
-                    print(f"{i}: {contact}")
+                while True:
+                    supplier_name = input("Enter supplier to edit: ")
+                    supplier = get_supplier_by_name(supplier_name)
+                    for i, contact in enumerate(supplier.ContactPerson, start=1):
+                        print(f"{i}: {contact}")
 
-                contact_index = input("What contact person do you want to edit: ")
-                contact_index = int(contact_index) - 1
-                contact_to_edit = supplier.ContactPerson[contact_index]
+                    contact_index = input("What contact person do you want to edit: ")
+                    contact_index = int(contact_index) - 1
 
-                new_name = input("Enter new contact person: ")
-                new_phone = input("Enter new phone number: ")
-                new_email = input("Enter new email: ")
-                new_value = add_new_contact_person(new_name, new_phone, new_email)
-                store_edited_supplier_contact_person(supplier_name, new_value, contact_index)
+                    new_name = input("Enter contact person: ")
+                    new_phone = input("Enter phone number: ")
+                    new_email = input("Enter email: ")
+                    new_contact = create_new_contact_person(new_name, new_phone, new_email)
+                    store_edited_supplier_contact_person(supplier_name, new_contact, contact_index)
 
-        elif choice == "7":
+                    print("Do you want to edit another contact?")
+                    edit_contact = input("Yes or No: ")
+                    if edit_contact.lower() == "n" or edit_contact.lower() == "no":
+                        break
+
+        elif choice == "8":
             suppliers = get_all_suppliers()
             for supplier in suppliers:
                 print(supplier)
@@ -145,20 +226,53 @@ def suppliers_menu():
             name = input("Enter The Id Of Supplier You Want To Delete: ")
             delete_supplier(name)
 
-        elif choice == "8":
-            supplier_parts = get_all_supplier_parts()
-            for part in supplier_parts:
-                print(part)
-
         elif choice == "9":
-            supplier_manufacturers = get_all_supplier_manufacturers()
-            for manufacture in supplier_manufacturers:
-                print(manufacture)
+            suppliers = get_all_suppliers()
+            for supplier in suppliers:
+                print(supplier)
+                print("------------------------------")
+
+            supplier_name = input("Enter supplier you want to delete a part for: ")
+            supplier = get_supplier_by_name(supplier_name)
+            for i, part in enumerate(supplier.Parts, start=1):
+                print(f"{i}: {part}")
+
+            part_index = input("What part do you want to delete: ")
+            part_index = int(part_index) - 1
+
+            delete_part(supplier_name, part_index)
 
         elif choice == "10":
+            suppliers = get_all_suppliers()
+            for supplier in suppliers:
+                print(supplier)
+                print("------------------------------")
+
+            supplier_name = input("Enter supplier you want to delete an address for: ")
+            supplier = get_supplier_by_name(supplier_name)
+            for i, address in enumerate(supplier.Address, start=1):
+                print(f"{i}: {address}")
+
+            address_index = input("What address do you want to delete: ")
+            address_index = int(address_index) - 1
+
+            delete_address(supplier_name, address_index)
+
+        elif choice == "11":
+            suppliers = get_all_suppliers()
+            for supplier in suppliers:
+                print(supplier)
+                print("------------------------------")
+
+            supplier_name = input("Enter supplier you want to delete a contact person for: ")
+            supplier = get_supplier_by_name(supplier_name)
+            for i, contact in enumerate(supplier.ContactPerson, start=1):
+                print(f"{i}: {contact}")
+
+            contact_index = input("What contact person do you want to delete: ")
+            contact_index = int(contact_index) - 1
+
+            delete_contact_person(supplier_name, contact_index)
+
+        elif choice == "12":
             break
-
-
-
-
-
