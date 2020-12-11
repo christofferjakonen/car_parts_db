@@ -1,5 +1,5 @@
 from bson import ObjectId
-from app.Data.models.supplier_models import *
+from app.Data.models.models import *
 
 
 def get_all_suppliers():
