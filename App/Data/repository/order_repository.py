@@ -10,7 +10,7 @@ def get_all_orders():
     return orders
 
 
-def make_new_order(cust_id, empl_id, reg_num, part_ids):
+def make_new_order(cust_id, empl_id, reg_num, part_ids, store_id):
 
     prices_for_parts = []
 
@@ -34,7 +34,8 @@ def make_new_order(cust_id, empl_id, reg_num, part_ids):
         'partIds': part_ids,
         'orderDate': datetime.datetime.now(),
         'completed': "No",
-        'sumPrice': sum_price
+        'sumPrice': sum_price,
+        'storeId': store_id
     })
 
     new_order.save()
@@ -66,6 +67,7 @@ def mark_order_as_completed(order_id):
     print(new_order)
     new_order.save()
     print('Done!')
+
 
 def delete_order(choice):
 

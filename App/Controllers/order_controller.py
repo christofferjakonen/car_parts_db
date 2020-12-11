@@ -5,8 +5,8 @@ def get_all_orders():
     return orr.get_all_orders()
 
 
-def make_new_order(cust_id, empl_id, reg_num, part_ids):
-    return orr.make_new_order(cust_id, empl_id, reg_num, part_ids)
+def make_new_order(cust_id, empl_id, reg_num, part_ids, store_id):
+    return orr.make_new_order(cust_id, empl_id, reg_num, part_ids, store_id)
 
 
 def get_uncompleted_orders():

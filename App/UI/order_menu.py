@@ -2,7 +2,7 @@ from Controllers.customer_controller import get_all_customers, simple_customer_f
 from Controllers.car_controller import get_car_for_car_id, simple_car_find, simple_car_by_reg_num
 from Controllers.employee_controller import get_all_employees
 from Controllers.order_controller import make_new_order, get_uncompleted_orders, mark_order_as_completed, delete_order, get_all_orders
-
+from Controllers.store_controller import get_all_stores
 
 def order_menu():
 
@@ -73,14 +73,29 @@ def order_menu():
                 if new_part_id != 'quit':
                     part_ids.append(new_part_id)
                     print('Done!')
-            make_new_order(cust_id, empl_id, reg_num, part_ids)
+
+            stores = get_all_stores()
+            for store in stores:
+                print('-------------------')
+                print(
+                    f'Store ID: {store.storeId} \n Store Address: {store.Adress}')
+
+            store_id = input('Enter Store ID of the store where the order was made')
+
+            make_new_order(cust_id, empl_id, reg_num, part_ids, store_id)
 
         elif selection == '2': # View all Orders that are not completed
             orders = get_uncompleted_orders()
 
-            for order in orders:    # TODO Printa separat
-
-                print(order)
+            for order in orders:
+                print('-------------------')
+                print(
+                    f' Order ID: {order._id} \n Customer Number: {order.customerId} \n Employee ID: {order.employeeId}'
+                    f' Registration Number of Customers car: {order.registrationNumber}')
+                for IDs in order.partIds:
+                    print(f' ID of Ordered part: {IDs}')
+                print(
+                    f' Order date: {order.orderDate} \n Completed: {order.completed} \n Total Price: {order.sumPrice}')
 
         elif selection == '3': # Mark order as completed
 
@@ -90,9 +105,6 @@ def order_menu():
                 print('-------------------')
                 print(f' Order ID: {order._id} \n Registration Number: {order.registrationNumber} \n')
 
-            #for idx, order in enumerate(orders, start=1):
-                #print('-------------------')
-                #print(f'{idx}, \n Order ID: {order._id} \n Registration Number: {order.registrationNumber} \n')
 
             order_id = input('Enter Order ID of the order that you want to mark as completed: ')
             mark_order_as_completed(order_id)
