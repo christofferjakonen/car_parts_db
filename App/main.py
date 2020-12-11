@@ -3,7 +3,9 @@ from UI.main_menu import main_menu
 
 
 def main():
+
     Base.metadata.create_all(engine)
+
     main_menu()
 
 

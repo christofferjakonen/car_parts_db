@@ -6,6 +6,7 @@ def get_all_employees():
     return er.get_all_employees()
 
 
+
 def get_employee_by_name(searchName):
     return er.get_employee_by_name(searchName)
 
@@ -41,3 +42,4 @@ def update_employee(searchId, columnName, newValue, index=None):
 
 def delete_employee_by_id(searchId):
     return er.delete_employee_by_id(searchId)
+

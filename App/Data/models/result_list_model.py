@@ -4,3 +4,6 @@ class ResultList(list):
 
     def last_or_none(self):
         return self[-1] if len(self) > 0 else None
+
+    def all_or_none(self):
+        return self if len(self) > 0 else None

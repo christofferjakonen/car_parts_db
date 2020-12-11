@@ -28,3 +28,4 @@ class Part(Document):
 
 class Manufacturer(Document):
     collection = mdb.manufacturers
+
