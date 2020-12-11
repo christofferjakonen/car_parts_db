@@ -20,3 +20,7 @@ class Employee(Document):
 
 class Store(Document):
     collection = mdb.stores
+
+
+class Part(Document):
+    collection = mdb.parts

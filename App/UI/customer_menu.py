@@ -1,4 +1,4 @@
-from Controllers.customers_controller import store_new_customer, get_all_customers, get_customer_by_id, get_customer_by_name, \
+from Controllers.customer_controller import store_new_customer, get_all_customers, get_customer_by_id, get_customer_by_name, \
      delete_customer, add_car_to_customer, delete_reg_num, get_reg_number_for_customer
 from Controllers.car_controller import get_all_cars
 
@@ -18,13 +18,13 @@ def customers_menu():
 
         selection = input("> ")
 
-        if selection == "1":    #View all customers
+        if selection == "1":    # View all customers
             customers = get_all_customers()
             for customer in customers:
                 print(customer.fullName)
                 print('-----------------')
 
-        elif selection == "2":  #View customer by ID
+        elif selection == "2":  # View customer by ID
 
             customers = get_all_customers()
             for customer in customers:
@@ -39,7 +39,7 @@ def customers_menu():
             else:
                 print("Could not find customer with id ", cust_id)
 
-        elif selection == "3":  #Find customers by name
+        elif selection == "3":  # Find customers by name
 
 
             while True:
@@ -82,17 +82,9 @@ def customers_menu():
             car_id = input("Enter Car ID of the car that you want to assign to the Customer")
             reg_num = input("Enter Registration Number of the Car")
 
-            car = get_car_for_car_id(car_id)
-
-            for i in one_customer:
-                for j in i.regNumbers:
-                    print('-------------------')
-                    print("\n".join("{}\t{}".format(k, v) for k, v in j.items()))
-
-
             add_car_to_customer(cust_id, reg_num, car_id)
 
-        elif selection == "6":  #Remove Car from Customer
+        elif selection == "6":  # Remove Car from Customer
             customers = get_all_customers()
             for customer in customers:
                 print(f' Customer ID: {customer._id} Name: {customer.fullName} Registration number(s): {customer.regNumbers}')

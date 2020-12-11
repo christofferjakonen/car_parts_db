@@ -43,11 +43,6 @@ def store_new_customer(name, phone_number, email, contact_person=None):
     new_customer.save()
 
 
-
-
-
-
-
 def delete_customer(id):
 
 
@@ -56,14 +51,9 @@ def delete_customer(id):
     return None
 
 
-
-
-
 def add_car_to_customer(cust_id, reg_num, car_id):
 
-
     customer = Customer.find(_id=ObjectId(cust_id)).first_or_none()
-
 
     new_customer = {
         "_id": customer._id,
@@ -78,11 +68,6 @@ def add_car_to_customer(cust_id, reg_num, car_id):
     Customer(new_customer).save()
 
     print('Done!')
-
-
-
-
-
 
 
 def delete_reg_num(cust_num, reg_num):

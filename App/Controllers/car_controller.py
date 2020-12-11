@@ -1,5 +1,5 @@
 import Data.repository.car_repository as cr
-import Data.repository.parts_repository as pr
+import Data.repository.part_repository as pr
 
 
 def get_all_cars(): # View All Cars
@@ -14,23 +14,29 @@ def store_new_car(brand, model, color, model_year):     # Add new Car
     cr.store_new_car(brand, model, color, model_year)
 
 
-def delete_car(id): # Delete Car
-    return cr.delete_car(id)
+def delete_car(car_id):     # Delete Car
+    return cr.delete_car(car_id)
 
-
+"""
 def view_parts_for_reg_num(reg):    # View All Parts for Registration number
     return cr.view_parts_for_reg_num(reg)
-
+"""
 
 def get_car_for_car_id(car_id):     # View parts for reg number
     return cr.get_car_for_car_id(car_id)
 
 
+def add_part_to_car(car_id, part_id):   # Add par to car
+    return cr.add_part_to_car(car_id, part_id)
 
 
 
+def simple_car_find(car_id):
+    return cr.simple_car_find(car_id)
 
 
+def simple_car_by_reg_num(reg_num):
+    return cr.simple_car_by_reg_num(reg_num)
 
 
 
