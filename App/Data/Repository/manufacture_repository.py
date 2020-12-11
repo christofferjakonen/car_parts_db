@@ -1,49 +1,59 @@
-
-from Data.db import session
-from Data.models.car import Car
-from Data.models.car_has_parts import CarHasPart
-from Data.models.customer import Customer
-from Data.models.manufacture import Manufacture
-from Data.models.manufacture_contact_person import ManufactureContactPerson
-from Data.models.part import Part
-from Data.models.reg_number import RegNumber
-from Data.models.supplier import Supplier
-from Data.models.supplier_address import SupplierAddress
-from Data.models.supplier_contact_person import SupplierContactPerson
-from Data.models.supplier_has_manufacture import SupplierHasManufacture
-from Data.models.supplier_has_parts import SupplierHasPart
-from Data.models.warehouse import Warehouse
-from sqlalchemy.exc import SQLAlchemyError
+from bson import ObjectId
+from ..models.models import *
+import re
 
 
 def get_all_manufacturers():
-    return session.query(Manufacture).all()
+    return Manufacturer.all()
+
+def get_manufacturer_by_name(search):
+    everything = Manufacturer.all()
+    search = search.lower()
+    return [everything[i] for i in range(len(everything)) if re.search(f".*{search}.*", everything[i].Manufacturer.lower())]
 
 
-def add_new_manufacturer(manufacturer, country="None", state="None", city="None", zip=1, address="None", phone="None"):
-    try:
-        print("-- entering add_new_manufacturer --")
-        newManufacturer = Manufacture(Manufacture=manufacturer, Country=country, State=state, City=city, ZipCode=zip, StreetAddress=address, PhoneNumber=phone)
-        print("-- created new manufacturer --")
-        session.add(newManufacturer)
-        print("-- added new manufacturer to session --")
-        session.commit()
-        session.close()
-    except SQLAlchemyError as error:
-        print(error.__dict__["orig"])
-        session.rollback()
+def get_manufacturer_by_id(inputID):
+    everything = Manufacturer.all()
+    return [everything[i] for i in range(len(everything)) if re.search(f".*{inputID}.*", str(everything[i]._id))]
 
 
-def update_part_by_ID(manufacturer, columnName, newValue=None):
-    try:
-        stmt1 = session.query(Manufacture).filter_by(Manufacture=manufacturer)
-        print(stmt1)
-        stmt2 = {columnName: newValue}
-        stmt1.update(stmt2)
+def add_new_manufacturer(manufacturer, country="None", state="None", city="None", zip="None", address="None", phone="None"):
+    new_manufacturer = Manufacturer({
+        "Manufacturer": manufacturer,
+        "Contacts": [],
+        "Address": {
+            "Country": country,
+            "State": state,
+            "City": city,
+            "Zipcode": zip,
+            "StreetAddress": address,
+            "PhoneNumber": phone
+        }
+    })
+    new_manufacturer.save()
+    return None
 
-        session.commit()
-        session.close()
-    except SQLAlchemyError as error:
-        print(error.__dict__["orig"])
-        session.rollback()
 
+def update_manufacturer(searchId, searchColumn=None, newValue="None", index=None):
+    old = Manufacturer.find(**{"_id": ObjectId(searchId)}).first_or_none()
+    updated = {
+        '_id': old._id,
+        "Manufacturer": old.Manufacturer,
+        "Contacts": old.Contacts,
+        "Address": old.Address
+    }
+    if searchColumn == "Manufacturer":
+        updated["Manufacturer"] = newValue
+    if searchColumn == "Address":
+        updated["Address"] = newValue
+    if searchColumn == "ContactNew":
+        updated["Contacts"].append(newValue)
+    if searchColumn == "ContactEdit":
+        updated["Contacts"][index] = newValue
+
+    Manufacturer(updated).save()
+    return None
+
+def delete_manufacturer_by_id(searchId):
+    Manufacturer.delete(_id=ObjectId(searchId))
+    return None

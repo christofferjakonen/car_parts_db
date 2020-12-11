@@ -1,89 +1,79 @@
-from Data.db import session
-from sqlalchemy.sql.expression import delete
-from Data.models.car import Car
-from Data.models.car_has_parts import CarHasPart
-from Data.models.customer import Customer
-from Data.models.manufacture import Manufacture
-from Controllers.manufacture_controller import add_new_manufacturer
-from Data.models.manufacture_contact_person import ManufactureContactPerson
-from Data.models.part import Part
-from Data.models.reg_number import RegNumber
-from Data.models.supplier import Supplier
-from Data.models.supplier_address import SupplierAddress
-from Data.models.supplier_contact_person import SupplierContactPerson
-from Data.models.supplier_has_manufacture import SupplierHasManufacture
-from Data.models.supplier_has_parts import SupplierHasPart
-from Data.models.warehouse import Warehouse
-from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-
-
+from bson import ObjectId
+from ..models.models import *
+import re
 
 def get_all_parts():
-    return session.query(Part).order_by(Part.ProductNum).all()
-
+    return Part.all()
 
 def get_part_by_id(inputID):
-    return session.query(Part).filter(Part.ProductNum == inputID).first()
+    everything = Part.all()
+    return [everything[i] for i in range(len(everything)) if re.search(f".*{inputID}.*", str(everything[i]._id))]
 
 
 def get_part_by_name(partName):
-    return session.query(Part).filter(Part.ProductName.like(f"%{partName}%")).all()
+    everything = Part.all()
+    partName = partName.lower()
+    return [everything[i] for i in range(len(everything)) if re.search(f".*{partName}.*", everything[i].Product_Name.lower())]
+
+def get_part_by_product_number(productNumber):
+    everything = Part.all()
+    return [everything[i] for i in range(len(everything)) if re.search(f".*{productNumber}.*", everything[i].Product_Number)]
 
 
-def add_new_part(partID, partName=None, partMaker=None, description=None, cost=None, sellPrice=None):
-    try:
-        maker = session.query(Manufacture).filter(Manufacture.Manufacture == partMaker).first()
-        if not maker:
-            print("Manufacturer not found")
-            answer = input("Add new manufacture as a blank manufacturer? (y/n): ")
-            if answer == "y" or answer == "Y":
-                # call function to create manufacture
-                add_new_manufacturer(partMaker)
-                maker = session.query(Manufacture).filter(Manufacture.Manufacture == partMaker).first()
-            else:
-                return None
-        newPart = Part(ProductNum=partID, Manufacture=maker.Manufacture, ProductName=partName, PartDescription=description, PurchasePrice=cost, SellPrice=sellPrice)
-        session.add(newPart)
-        session.commit()
-        session.close()
-    except SQLAlchemyError as error:
-        print(error.__dict__["orig"])
-        session.rollback()
+def add_new_part(partID, partName="None", partMaker="None", description="None", cost="None", sellPrice="None"):
+    new_part = Part({
+        "Product_Number": partID,
+        "Product_Name": partName,
+        "Manufacturer": partMaker,
+        "Product_Description": description,
+        "Warehouse": [],
+        "Buy_Price": cost,
+        "Sell_Price": sellPrice
+    })
+    new_part.save()
+    return None
 
 
-def update_part_by_ID(partID, columnName, newValue=None):
-    try:
-        stmt1 = session.query(Part).filter_by(ProductNum=partID)
-        stmt2 = {columnName: newValue}
-        try:
-            stmt1.update(stmt2)
-        except IntegrityError:
-            print("\nUnknown manufacturer")
-            print("Create new manufacture?")
-            answer = input("y/n : ")
-            if answer == "y" or answer == "Y":
-                # create new manufacturer
-                pass
-            else:
-                session.rollback()
+def update_part_by_id(partID, columnName=None, newValue="None", index=None):
+    old = Part.find(**{"_id": ObjectId(partID)}).first_or_none()
+    updated = {
+        '_id': old._id,
+        'Product_Number': old.Product_Number,
+        'Product_Name': old.Product_Name,
+        'Manufacturer': old.Manufacturer,
+        'Product_Description': old.Product_Description,
+        'Warehouse': old.Warehouse,
+        'Buy_Price': old.Buy_Price,
+        'Sell_Price': old.Sell_Price
+    }
+    if columnName == "ProductNum":
+        updated["Product_Number"] = newValue
+    if columnName == "ProductName":
+        updated["Product_Name"] = newValue
+    if columnName == "Manufacture":
+        updated["Manufacturer"] = newValue
+    if columnName == "PartDescription":
+        updated["Product_Description"] = newValue
+    if columnName == "PurchasePrice":
+        updated["Buy_Price"] = newValue
+    if columnName == "SellPrice":
+        updated["Sell_Price"] = newValue
+    if columnName == "Warehouse":
+        updated["Warehouse"].append(newValue)
+    if columnName == "WarehouseEdit":
+        updated["Warehouse"][index] = newValue
 
-        session.commit()
-        session.close()
-    except SQLAlchemyError as error:
-        print(error.__dict__["orig"])
-        session.rollback()
+    # todo reduce code size by using var directly as index
+
+    Part(updated).save()
+    return None
 
 
-def delete_part_by_ID(command):
-    try:
-        stmt = session.query(Part).get(command)
-        session.delete(stmt)
-        session.commit()
-        session.close()
-    except SQLAlchemyError as error:
-        print(error.__dict__["orig"])
-        session.rollback()
+def delete_part_by_id(partID):
+    Part.delete(_id=ObjectId(partID))
+    return None
 
 
 def get_cars_for_part_id(part_id):
-    return session.query(CarHasPart.CarID).filter(CarHasPart.PartsProductNum == part_id).all()
+    pass
+
