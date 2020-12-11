@@ -38,12 +38,34 @@ def add_new_employee(store_id, employee):
     Store(store).save()
 
 
-def store_edited_store_address():
-    pass
+def store_edited_store_employee(store_id, employee_index, new_employee):
+    old = Store.find(_id=ObjectId(store_id)).first_or_none()
+    store = {
+        '_id': old._id,
+        'Address': old.Address,
+        'Employees': old.Employees
+    }
 
+    store['Employees'][employee_index] = new_employee
 
-def store_edited_store_employee():
-    pass
+    Store(store).save()
+
+def store_edited_store_address(store_id, new_country, new_state, new_city, new_zip_code, new_street_address, new_phone_num):
+    old = Store.find(_id=ObjectId(store_id)).first_or_none()
+    store = {
+        '_id': old._id,
+        'Address': old.Address,
+        'Employees': old.Employees
+    }
+
+    store['Address']['Country'] = new_country
+    store['Address']['State'] = new_state
+    store['Address']['City'] = new_city
+    store['Address']['ZipCode'] = new_zip_code
+    store['Address']['StreetAddress'] = new_street_address
+    store['Address']['PhoneNumber'] = new_phone_num
+
+    Store(store).save()
 
 
 def delete_store(store_id):

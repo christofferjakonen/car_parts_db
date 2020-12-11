@@ -55,25 +55,33 @@ def store_menu():
             for store in stores:
                 print(store)
 
-            store_id = input("Enter the id of the store you want to delete employee for: ")
+            store_id = input("Enter id of store you want to edit address for: ")
 
+            new_country = input("Enter country: ")
+            new_state = input("Enter state: ")
+            new_city = input("Enter city: ")
+            new_zip_code = input("Enter zip code: ")
+            new_street_address = input("Enter street address: ")
+            new_phone_num = input("Enter phone number: ")
+
+            store_edited_store_address(store_id, new_country, new_state, new_city, new_zip_code, new_street_address, new_phone_num)
+
+        elif choice == "5":
+            stores = get_all_stores()
+            for store in stores:
+                print(store)
+
+            store_id = input("Enter id of store you want to edit address for: ")
             store = get_store_by_id(store_id)
-            for i, address in enumerate(store.Address, start=1):
-                print(f"{i}: {address}")
+            for i, employee in enumerate(store.Employees, start=1):
+                print(f"{i}: {employee}")
 
-            address_index = input("What address do you want to edit: ")
-            address_index = int(address_index) - 1
+            employee_index = input("What employee do you want to edit: ")
+            employee_index = int(employee_index) - 1
 
-            new_name = input("Enter contact person: ")
-            new_phone = input("Enter phone number: ")
-            new_email = input("Enter email: ")
-            new_contact = create_new_contact_person(new_name, new_phone, new_email)
-            store_edited_supplier_contact_person(supplier_name, new_contact, address_index)
+            new_employee = input("Enter new employee: ")
 
-            print("Do you want to edit another contact?")
-            edit_contact = input("Yes or No: ")
-            if edit_contact.lower() == "n" or edit_contact.lower() == "no":
-                break
+            store_edited_store_employee(store_id, employee_index, new_employee)
 
         elif choice == "6":
             stores = get_all_stores()

@@ -17,12 +17,12 @@ def add_new_employee(store_id, employee):
     sr.add_new_employee(store_id, employee)
 
 
-def store_edited_store_address():
-    sr.store_edited_store_address()
+def store_edited_store_address(store_id, new_country, new_state, new_city, new_zip_code, new_street_address, new_phone_num):
+    sr.store_edited_store_address(store_id, new_country, new_state, new_city, new_zip_code, new_street_address, new_phone_num)
 
 
-def store_edited_store_employee():
-    sr.store_edited_store_employee()
+def store_edited_store_employee(store_id, employee_index, new_employee):
+    sr.store_edited_store_employee(store_id, employee_index, new_employee)
 
 
 def delete_store(store_id):
