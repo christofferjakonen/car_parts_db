@@ -14,3 +14,4 @@ class RegNumber(Base):
 
     def __repr__(self):
         return f'{self.CustomerID}, {self.RegNumber}, {self.CarID}'
+

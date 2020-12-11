@@ -16,9 +16,11 @@ def suppliers_menu():
         print("7. Delete A Supplier")
         print("8. View All Parts Suppliers Have")
         print("9. View All Manufacturers For Suppliers")
-        print("10. View Supplier Addresses Menu")
-        print("11. View Supplier Contact Person Menu")
-        print("12. Exit Supplier Menu")
+        print("10. Add Which Manufacturer Makes Parts For Which Suppliers")
+        print("11. Add Which Suppliers Supplies Which Parts")
+        print("12. View Supplier Addresses Menu")
+        print("13. View Supplier Contact Person Menu")
+        print("14. Exit Supplier Menu")
 
         choice = input("> ")
 
@@ -99,12 +101,22 @@ def suppliers_menu():
                 print(manufacture)
 
         elif choice == "10":
-            supplier_address_menu()
+            manufacture = input("Enter manufacture: ")
+            supplier = input("Enter supplier: ")
+            supplier_has_manufacturer(manufacture, supplier)
 
         elif choice == "11":
-            suppliers_contact_person_menu()
+            supplier = input("Enter supplier: ")
+            part_num = input("Enter product number of part: ")
+            supplier_has_parts(supplier, part_num)
 
         elif choice == "12":
+            supplier_address_menu()
+
+        elif choice == "13":
+            suppliers_contact_person_menu()
+
+        elif choice == "14":
             break
 
 

@@ -13,3 +13,4 @@ class CarHasPart(Base):
 
     def __repr__(self):
         return f'{self.CarID}, {self.PartsProductNum}'
+

@@ -114,6 +114,45 @@ def delete_supplier_contact_person(contact_name):
     session.close()
 
 
+def store_edited_supplier_contact_supplier(supplier_contact, new_value):
+    try:
+        supplier_contact.Supplier = new_value
+        session.commit()
+        session.close()
+        print(supplier_contact)
+    except:
+        session.rollback()
+
+
+def store_edited_supplier_contact_name(supplier_contact, new_value):
+    try:
+        supplier_contact.FullName = new_value
+        session.commit()
+        session.close()
+        print(supplier_contact)
+    except:
+        session.rollback()
+
+
+def store_edited_supplier_contact_phone_num(supplier_contact, new_value):
+    try:
+        supplier_contact.Supplier = new_value
+        session.commit()
+        session.close()
+        print(supplier_contact)
+    except:
+        session.rollback()
+
+
+def store_edited_supplier_contact_email(supplier_contact, new_value):
+    try:
+        supplier_contact.Supplier = new_value
+        session.commit()
+        session.close()
+        print(supplier_contact)
+    except:
+        session.rollback()
+
 # addresses
 
 
@@ -121,8 +160,19 @@ def get_all_supplier_addresses():
     return session.query(SupplierAddress).all()
 
 
+def add_new_supplier_address(supplier, country, state, city, zip_code, street_address):
+    new_supplier_address = SupplierAddress(Supplier=supplier, Country=country, State=state, City=city, ZipCode=zip_code, StreetAddress=street_address)
+    session.add(new_supplier_address)
+    session.commit()
+    session.close()
+
+
 def get_supplier_address_by_name(supplier_name):
     return session.query(SupplierAddress).filter(SupplierAddress.Supplier.like(f'%{supplier_name}%')).all()
+
+
+def get_supplier_address_by_id(address_id):
+    return session.query(SupplierAddress).filter(SupplierAddress.SupplierAddressID.like(f'%{address_id}%')).all()
 
 
 def get_supplier_address_by_country(country):
@@ -216,6 +266,12 @@ def delete_supplier_address(supplier_name):
 
 # manufacturers
 
+def supplier_has_manufacturer(manufacturer, supplier):
+    new_supplier_manufacture = SupplierHasManufacture(Manufacture=manufacturer, Supplier=supplier)
+    session.add(new_supplier_manufacture)
+    session.commit()
+    session.close()
+
 
 def get_all_supplier_manufacturers():
     return session.query(SupplierHasManufacture).all()
@@ -226,3 +282,10 @@ def get_all_supplier_manufacturers():
 
 def get_all_supplier_parts():
     return session.query(SupplierHasPart).all()
+
+
+def supplier_has_parts(supplier, part_num):
+    new_supplier_manufacture = SupplierHasPart(Supplier=supplier, ProductNumPart=part_num)
+    session.add(new_supplier_manufacture)
+    session.commit()
+    session.close()

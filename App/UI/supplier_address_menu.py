@@ -6,6 +6,7 @@ def supplier_address_menu():
         print("Supplier Addresses Menu")
         print("--------------")
         print("1. View All Supplier Addresses")
+        print("0. Find Supplier Address By Id")
         print("2. Find Supplier Address By Name")
         print("3. Find Supplier Address By Country")
         print("4. Find Supplier Address By City")
@@ -23,6 +24,15 @@ def supplier_address_menu():
             addresses = get_all_supplier_addresses()
             for address in addresses:
                 print(address)
+
+        elif choice == "0":
+            addresses = get_all_supplier_addresses()
+            for address in addresses:
+                print(address)
+            address_id = input("Enter Id For Supplier Address: ")
+            address_id = int(address_id)
+            for o in get_supplier_address_by_id(address_id):
+                print(o)
 
         elif choice == "3":
             country = input("Enter Country: ")
@@ -57,7 +67,13 @@ def supplier_address_menu():
                 print(f"{key}. {supplier_address}")
 
         elif choice == "8":
-            pass
+            supplier = input("Name Of Supplier: ")
+            country = input("Country: ")
+            state = input("State: ")
+            city = input("City: ")
+            zip_code = input("State: ")
+            street_address = input("Street Address: ")
+            add_new_supplier_address(supplier, country, state, city, zip_code, street_address)
 
         elif choice == "9":
             supplier_addresses = get_all_supplier_addresses()

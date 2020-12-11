@@ -1,30 +1,16 @@
-from UI.customers_menu import customers_menu
+from UI.suppliers_menu import suppliers_menu
 
 
 def main_menu():
     while True:
         print("Main Menu")
-        print("=========")
-        print("1. Customers")
-        print("2. Products")
-        print("3. Orders")
-        print("4. Quit")
+        print("---------")
+        print("1. Suppliers")
+        print("2. Quit")
 
-        selection = input("> ")
-        if selection == "1":
-            customers_menu()
+        choice = input("> ")
 
-        else:
+        if choice == "1":
+            suppliers_menu()
+        elif choice == "2":
             break
-
-
-
-def main():
-
-    main_menu()
-
-
-
-if __name__ == "__main__":
-    main()
-
