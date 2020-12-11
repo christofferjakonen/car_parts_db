@@ -28,7 +28,7 @@ def add_new_employee(full_name, store, address, pay):
     new_employee.save()
 
 
-def update_employee(searchId, columnName, newValue="None"):
+def update_employee(searchId, columnName, newValue="None", index=None):
     old = Employee.find(**{"_id": ObjectId(searchId)}).first_or_none()
     updated = {
         "_id": old._id,
@@ -38,6 +38,13 @@ def update_employee(searchId, columnName, newValue="None"):
         "Pay": old.Pay
     }
     # changes
+    try:
+        if index:
+            updated[columnName][index] = newValue
+        else:
+            updated[columnName] = newValue
+    except KeyError:
+        return None
     Employee(updated).save()
 
 

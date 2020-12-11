@@ -1,4 +1,5 @@
 import Data.Repository.employee_reposistory as er
+from bson import ObjectId
 
 
 def get_all_employees():
@@ -25,5 +26,18 @@ def add_new_employee(full_name, country, state, city, zipnum, street, phone, sto
     return er.add_new_employee(full_name, store, address, pay)
 
 
-def update_employee(searchId, columnName, newValue):
-    pass
+def update_employee(searchId, columnName, newValue, index=None):
+    if columnName == "1":
+        columnName = "Full_Name"
+    elif columnName == "2":
+        newValue = ObjectId(newValue)
+        columnName = "Store"
+    elif columnName == "3":
+        columnName = "Address"
+    elif columnName == "4":
+        columnName = "Pay"
+    return er.update_employee(searchId, columnName, newValue, index)
+
+
+def delete_employee_by_id(searchId):
+    return er.delete_employee_by_id(searchId)

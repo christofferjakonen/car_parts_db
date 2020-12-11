@@ -1,4 +1,5 @@
-from Controllers.employee_controller import get_all_employees, get_employee_by_name, get_employee_by_id, add_new_employee
+from Controllers.employee_controller import get_all_employees, get_employee_by_name, \
+    get_employee_by_id, add_new_employee, update_employee
 from Controllers.store_controller import get_all_stores
 
 def employee_menu():
@@ -92,13 +93,44 @@ def employee_menu():
             search = get_employee_by_id(searchId)[0]
             print(f"1. Employee name: {search.Full_Name}")
             print(f"2. Working in store: {search.Store}")
-            print(f"Address: {{ "
+            print(f"3. Address: {{ "
                   f"Country: {search.Address['Country']}, "
                   f"State: {search.Address['State']}, "
                   f"City: {search.Address['City']}, "
                   f"Zipcode: {search.Address['Zipcode']}, "
                   f"StreetAddress: {search.Address['StreetAddress']}, "
                   f"PhoneNumber: {search.Address['PhoneNumber']}", end=" }\n")
+            print(f"4. Pay: {search.Pay}")
+            columnNr = input("Column nr: ")
+
+            if columnNr == "1":
+                update_employee(searchId, "1", input("New Value: "))
+
+            elif columnNr == "2":
+                everything = get_all_stores()
+                for thing in everything:
+                    print(f"id: {thing._id}, Address: {thing.Address}")
+                store = input("New Value: ")
+                update_employee(searchId, "2", store)
+
+            elif columnNr == "3":
+                while True:
+                    for i, key, value in enumerate(search.Address.items(), start=1):
+                        print(f"{i}. {key}: {value}")
+                    index = input("Column nr / other to exit: ")
+                    if index and index.isnumeric() and 0 <= int(index) - 1 < len(search.Address):
+                        index = int(index) - 1
+                    else:
+                        break
+                    newValue = input("New Value: ")
+                    update_employee(searchId, "3", newValue, index)
+
+            elif columnNr == "4":
+                update_employee(searchId, "4", input("New pay/hour: "))
+
+            else:
+                print("Invalid column")
+                continue
 
         elif selection == "5":
             # delete employee
