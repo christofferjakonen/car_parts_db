@@ -1,7 +1,9 @@
 import Data.repository.customer_repository as cr
 
+
 def simple_customer_find(cust_id):
     return cr.simple_customer_find(cust_id)
+
 
 def get_all_customers():
     return cr.get_all_customers()
@@ -30,7 +32,3 @@ def add_car_to_customer(cust_id, reg_num, car_id):
 
 def delete_reg_num(cust_nr, reg_nr):
     return cr.delete_reg_num(cust_nr, reg_nr)
-
-
-def get_reg_number_for_customer(cust_id):
-    return cr.get_reg_number_for_customer(cust_id)

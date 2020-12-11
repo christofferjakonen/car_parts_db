@@ -24,3 +24,4 @@ class Store(Document):
 
 class Part(Document):
     collection = mdb.parts
+

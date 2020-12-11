@@ -1,8 +1,10 @@
 from Controllers.customer_controller import get_all_customers, simple_customer_find
-from Controllers.car_controller import get_car_for_car_id, simple_car_find, simple_car_by_reg_num
+from Controllers.car_controller import simple_car_find
 from Controllers.employee_controller import get_all_employees
-from Controllers.order_controller import make_new_order, get_uncompleted_orders, mark_order_as_completed, delete_order, get_all_orders
+from Controllers.order_controller import make_new_order, get_uncompleted_orders, mark_order_as_completed, \
+    delete_order, get_all_orders
 from Controllers.store_controller import get_all_stores
+
 
 def order_menu():
 
@@ -31,7 +33,7 @@ def order_menu():
             employees = get_all_employees()
 
             for employee in employees:
-                print(employee)
+                print(f' Employee Name: {employee.Full_Name} Emplyee ID: {employee._id}')
                 print('------------')
 
             empl_id = input("Enter Employee ID of the Employee who placed the order: ")
@@ -80,11 +82,11 @@ def order_menu():
                 print(
                     f'Store ID: {store.storeId} \n Store Address: {store.Adress}')
 
-            store_id = input('Enter Store ID of the store where the order was made')
+            store_id = input('Input Store ID of store where order was created')
 
             make_new_order(cust_id, empl_id, reg_num, part_ids, store_id)
 
-        elif selection == '2': # View all Orders that are not completed
+        elif selection == '2':  # View all Orders that are not completed
             orders = get_uncompleted_orders()
 
             for order in orders:
@@ -97,14 +99,13 @@ def order_menu():
                 print(
                     f' Order date: {order.orderDate} \n Completed: {order.completed} \n Total Price: {order.sumPrice}')
 
-        elif selection == '3': # Mark order as completed
+        elif selection == '3':  # Mark order as completed
 
             orders = get_uncompleted_orders()
 
             for order in orders:
                 print('-------------------')
                 print(f' Order ID: {order._id} \n Registration Number: {order.registrationNumber} \n')
-
 
             order_id = input('Enter Order ID of the order that you want to mark as completed: ')
             mark_order_as_completed(order_id)
@@ -120,7 +121,7 @@ def order_menu():
                     print(f' ID of Ordered part: {IDs}')
                 print(f' Order date: {order.orderDate} \n Completed: {order.completed} \n Total Price: {order.sumPrice}')
 
-        elif selection == '5': #     Delete order
+        elif selection == '5':  # Delete order
 
             orders = get_all_orders()
             for order in orders:

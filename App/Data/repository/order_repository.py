@@ -22,7 +22,7 @@ def make_new_order(cust_id, empl_id, reg_num, part_ids, store_id):
 
     for x in prices_for_parts:
 
-        sum_price += float(re.sub(r"[^0-9.]", "", x))   # TODO Gör dict av part_id med value = antal delar
+        sum_price += float(re.sub(r"[^0-9.]", "", x))
     sum_price = str(sum_price)
     currency = " kr"
     sum_price = (sum_price + currency)
@@ -73,6 +73,3 @@ def delete_order(choice):
 
     Order.delete(_id=ObjectId(choice))
     print('Done!')
-
-
-

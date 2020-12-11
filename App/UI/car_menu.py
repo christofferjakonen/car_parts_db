@@ -3,6 +3,7 @@ from Controllers.car_controller import get_all_cars, get_car_by_brand, \
 from Controllers.customer_controller import get_all_customers, get_customer_by_id
 from Controllers.part_controller import get_all_parts
 
+
 def car_menu():
 
     while True:
@@ -123,7 +124,3 @@ def car_menu():
 
         elif selection == "8":  # Quit Car Menu
             break
-
-
-
-

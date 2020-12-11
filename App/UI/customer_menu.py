@@ -1,5 +1,5 @@
 from Controllers.customer_controller import store_new_customer, get_all_customers, get_customer_by_id, get_customer_by_name, \
-     delete_customer, add_car_to_customer, delete_reg_num, get_reg_number_for_customer
+     delete_customer, add_car_to_customer, delete_reg_num
 from Controllers.car_controller import get_all_cars
 
 
@@ -40,7 +40,6 @@ def customers_menu():
                 print("Could not find customer with id ", cust_id)
 
         elif selection == "3":  # Find customers by name
-
 
             while True:
 
@@ -95,16 +94,13 @@ def customers_menu():
             reg_nr = input("Enter Registration number of the Car to be removed: ")
             delete_reg_num(cust_nr, reg_nr)
 
-
-        elif selection == "7":  #Delete customer
+        elif selection == "7":     # Delete customer
             customers = get_all_customers()
             for customer in customers:
                 print(customer)
                 print('-----------------')
-            id = (input("Enter Customer Id to be removed: "))
-            delete_customer(id)
+            cus_id = (input("Enter Customer Id to be removed: "))
+            delete_customer(cus_id)
 
         elif selection == "8":
             break
-
-

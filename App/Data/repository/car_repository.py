@@ -25,10 +25,7 @@ def get_car_for_car_id(car_id):
     return matches
 
 
-
-
 def store_new_car(brand, model, color, model_year):
-
 
     new_car = Car({
         'brand': brand,
@@ -41,19 +38,11 @@ def store_new_car(brand, model, color, model_year):
     print('Done!')
 
 
-def delete_car(id):
+def delete_car(car_id):
 
-    Car.delete(_id=ObjectId(id))
+    Car.delete(_id=ObjectId(car_id))
     print('done!')
     return None
-
-"""
-def view_parts_for_reg_num(reg):
-
-    car = Car.find(_id=ObjectId(id)).first_or_none()
-
-    return car.parts
-"""
 
 
 def add_part_to_car(car_id, part_id):
@@ -72,9 +61,11 @@ def add_part_to_car(car_id, part_id):
     new_car['parts'].append({"part": ObjectId(part_id)})
     Car(new_car).save()
 
+
 def simple_car_find(car_id):
 
     Car.find(_id=ObjectId(car_id)).first_or_none()
+
 
 def simple_car_by_reg_num(reg_num):
 
@@ -82,4 +73,3 @@ def simple_car_by_reg_num(reg_num):
     for thing in cars["regNumbers"]:
         if thing['regNumber'] == reg_num:
             return cars._id
-

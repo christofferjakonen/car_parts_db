@@ -5,20 +5,18 @@ import re
 
 def get_all_customers():
 
-
     return Customer.all()
 
 
+def simple_customer_find(cus_id):
+    return Customer.find(_id=ObjectId(cus_id))
 
-def simple_customer_find(id):
-    return Customer.find(_id=ObjectId(id))
 
 def get_customer_by_id(car_id):
 
     customers = Customer.all()
     matches = [customers[i] for i in range(len(customers)) if re.search(f'.*{car_id}.*', str(customers[i]._id))]
     return matches
-    #return Customer.find(_id=ObjectId(id))
 
 
 def get_customer_by_name(pattern):
@@ -43,10 +41,9 @@ def store_new_customer(name, phone_number, email, contact_person=None):
     new_customer.save()
 
 
-def delete_customer(id):
+def delete_customer(cus_id):
 
-
-    Customer.delete(_id=ObjectId(id))
+    Customer.delete(_id=ObjectId(cus_id))
     print('done!')
     return None
 
@@ -74,7 +71,6 @@ def delete_reg_num(cust_num, reg_num):
 
     customer = Customer.find(_id=ObjectId(cust_num)).first_or_none()
 
-
     new_customer = {
         "_id": customer._id,
         "fullName": customer.fullName,
@@ -88,13 +84,3 @@ def delete_reg_num(cust_num, reg_num):
     Customer(new_customer).save()
 
     print('Done!')
-
-
-
-def get_reg_number_for_customer(id):
-
-    reg_num = session.query(RegNumber.RegNumber).filter(RegNumber.CustomerID == id).all()
-
-    car_id = session.query(RegNumber.CarID).filter(RegNumber.CustomerID == id).all()
-
-    return reg_num, car_id
