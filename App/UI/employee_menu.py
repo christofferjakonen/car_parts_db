@@ -1,5 +1,5 @@
 from Controllers.employee_controller import get_all_employees, get_employee_by_name, \
-    get_employee_by_id, add_new_employee, update_employee
+    get_employee_by_id, add_new_employee, update_employee, delete_employee_by_id
 from Controllers.store_controller import get_all_stores
 
 def employee_menu():
@@ -134,7 +134,14 @@ def employee_menu():
 
         elif selection == "5":
             # delete employee
-            pass
+            print("\n=========")
+            print("Delete employee by id")
+            everything = get_all_employees()
+            for thing in everything:
+                print(f"id: {thing._id}, Manufacturer: {thing.Full_Name}")
+            searchId = input("id: ")
+            if searchId:
+                delete_employee_by_id(searchId)
 
         elif selection == "9":
             break
